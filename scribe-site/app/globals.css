@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   scribe — phase 1 design tokens
+   single source of truth for colour + spacing. tune values here only.
+   typography (phase 2) and dithered artwork (phase 3) land later.
+--------------------------------------------------------------------------- */
+:root {
+  --scribe-paper: #f7f6f1;
+  --scribe-paper-raised: #fbfaf7;
+  --scribe-ink: #0a0a0a;
+  --scribe-muted: #686868;
+  --scribe-rule-faint: rgba(10, 10, 10, 0.07);
+  --scribe-rule: rgba(10, 10, 10, 0.18);
+  --scribe-rule-strong: rgba(10, 10, 10, 0.42);
+  --scribe-cobalt: #173bff;
+  --scribe-cobalt-dark: #0f2ed6;
+  --scribe-white: #ffffff;
+
+  --scribe-max-width: 1440px;
+  --scribe-gutter: 1.25rem;
+}
+
+@theme inline {
+  --color-scribe-paper: var(--scribe-paper);
+  --color-scribe-paper-raised: var(--scribe-paper-raised);
+  --color-scribe-ink: var(--scribe-ink);
+  --color-scribe-muted: var(--scribe-muted);
+  --color-scribe-rule-faint: var(--scribe-rule-faint);
+  --color-scribe-rule: var(--scribe-rule);
+  --color-scribe-rule-strong: var(--scribe-rule-strong);
+  --color-scribe-cobalt: var(--scribe-cobalt);
+  --color-scribe-cobalt-dark: var(--scribe-cobalt-dark);
+  --color-scribe-white: var(--scribe-white);
+
+  /* temporary neutral stacks — replaced with final type in phase 2 */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", monospace;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --scribe-gutter: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --scribe-gutter: 3rem;
+  }
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--scribe-paper);
+  color: var(--scribe-ink);
+}
+
+::selection {
+  background: var(--scribe-cobalt);
+  color: var(--scribe-white);
+}
+
+:focus-visible {
+  outline: 2px solid var(--scribe-cobalt);
+  outline-offset: 2px;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* shared page shell — one max width, responsive gutters */
+.shell {
+  width: 100%;
+  max-width: var(--scribe-max-width);
+  margin-inline: auto;
+  padding-inline: var(--scribe-gutter);
+}
+
+/* faint engineering grid used on all artwork placeholder surfaces (phase 3) */
+.placeholder-grid {
+  background-image:
+    linear-gradient(to right, var(--scribe-rule-faint) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--scribe-rule-faint) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+
+/* phase 2/3 groundwork: keep the page inert for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
