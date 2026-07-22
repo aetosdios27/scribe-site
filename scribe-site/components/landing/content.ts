@@ -176,7 +176,7 @@ export const PRICING_TIERS: PricingTier[] = [
   },
 ];
 
-export const STACK: string[] = ["next.js", "vite", "astro", "remix", "html"];
+export const STACK: string[] = ["Next.js", "Vite", "Astro", "Remix", "plain HTML"];
 
 export type FooterColumn = {
   title: string;

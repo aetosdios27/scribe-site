@@ -47,7 +47,7 @@ export function StudioShowcase() {
       <div className="shell py-16 sm:py-24 lg:py-32">
         <SectionLabel>scribe studio</SectionLabel>
         <h2 id="studio-heading" className="sr-only">
-          scribe studio — edit markdown on the left, see your real website live
+          scribe studio: edit markdown on the left, see your real website live
           on the right
         </h2>
 
@@ -99,7 +99,7 @@ export function StudioShowcase() {
                 getting-started.md · markdown
               </p>
               <div aria-hidden="true" className="flex-1 overflow-x-auto p-4 sm:p-5">
-                <pre className="flex font-mono text-sm leading-7">
+                <pre className="flex font-mono text-[13px] leading-[1.65]">
                   <span className="pr-4 text-right text-scribe-paper/30 select-none">
                     {EDITOR_LINES.map((_, i) => (
                       <span key={i} className="block">
@@ -229,7 +229,7 @@ export function StudioShowcase() {
         </div>
 
         <p className="mt-3 font-mono text-xs text-scribe-muted">
-          fig. 3 — studio running against a local site. the divider drags, the
+          fig. 3 - studio running against a real site. the divider drags, the
           preview is your real localhost.
         </p>
       </div>

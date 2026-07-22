@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 180" width="260" height="180">
+  <!-- {S} emblem - braces + s-curve, rendered as paper dots on the cobalt band -->
+  <path d="M84 36 h-18 v40 l-14 14 14 14 v40 h18" fill="none" stroke="#202020" stroke-width="13" stroke-linejoin="miter"/>
+  <path d="M176 36 h18 v40 l14 14 -14 14 v40 h-18" fill="none" stroke="#202020" stroke-width="13" stroke-linejoin="miter"/>
+  <path d="M130 50 a30 30 0 0 1 0 60 a30 30 0 0 0 0 60" fill="none" stroke="#181818" stroke-width="24"/>
+</svg>

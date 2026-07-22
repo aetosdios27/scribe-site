@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GeistMono, GeistPixelCircle, texGyreHeros } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html
+      lang="en"
+      className={[
+        texGyreHeros.variable,
+        GeistMono.variable,
+        GeistPixelCircle.variable,
+        "h-full antialiased",
+      ].join(" ")}
+    >
       <body className="flex min-h-full flex-col bg-scribe-paper font-sans text-scribe-ink">
         {children}
       </body>

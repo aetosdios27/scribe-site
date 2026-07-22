@@ -29,7 +29,7 @@ export function FigurePlaceholder({
           </>
         )}
         <span className="absolute inset-0 grid place-items-center px-6 text-center font-mono text-xs text-scribe-muted">
-          {note ?? "artwork placeholder — phase 3"}
+          {note ?? "artwork placeholder - phase 3"}
         </span>
         <span className="absolute bottom-2 right-3 font-mono text-[10px] text-scribe-muted">
           x: 1024&nbsp;&nbsp;y: 768

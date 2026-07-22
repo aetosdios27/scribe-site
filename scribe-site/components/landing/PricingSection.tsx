@@ -1,5 +1,5 @@
 import { PRICING_TIERS } from "./content";
-import { FigurePlaceholder } from "./FigurePlaceholder";
+import { DitherFigure } from "./DitherFigure";
 import { PricingCard } from "./PricingCard";
 import { SectionLabel } from "./SectionLabel";
 
@@ -24,12 +24,14 @@ export function PricingSection() {
           </div>
 
           <div className="hidden xl:col-span-3 xl:block">
-            <FigurePlaceholder
-              label="fig. 4 — transparent pricing"
-              note="piggy bank — dithered artwork"
-              decorated
-              compact
-              className="h-full min-h-[320px]"
+            <DitherFigure
+              label="fig. 4 - transparent pricing"
+              src1x="/art/dither/pricing-pig-1x.png"
+              src2x="/art/dither/pricing-pig-2x.png"
+              width={339}
+              height={339}
+              className="flex h-full flex-col items-center justify-center"
+              imgClassName="w-full max-w-[300px]"
             />
           </div>
         </div>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380" width="300" height="380">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#7a7a7a"/>
+      <stop offset="100%" stop-color="#2e2e2e"/>
+    </linearGradient>
+    <linearGradient id="head" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a8a8a"/>
+      <stop offset="100%" stop-color="#3a3a3a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ground shadow -->
+  <ellipse cx="155" cy="344" rx="105" ry="14" fill="#c4c4c4"/>
+
+  <!-- hunched seated body, knees pulled up -->
+  <path d="M62 344 Q52 268 92 222 Q118 192 150 196 Q186 200 200 236 Q214 268 238 300 Q252 320 250 344 Z"
+        fill="url(#body)"/>
+
+  <!-- knees -->
+  <circle cx="216" cy="306" r="26" fill="url(#head)"/>
+  <circle cx="246" cy="326" r="18" fill="url(#head)"/>
+
+  <!-- bowed head -->
+  <circle cx="128" cy="168" r="32" fill="url(#head)"/>
+
+  <!-- arm wrapped around the knees -->
+  <path d="M150 236 Q182 286 232 306" fill="none" stroke="#242424" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- floating demands closing in -->
+  <g transform="translate(24 34) rotate(-8)">
+    <rect width="72" height="54" fill="#969696" stroke="#222" stroke-width="4"/>
+    <rect x="8" y="10" width="56" height="5" fill="#2a2a2a"/>
+    <rect x="8" y="22" width="56" height="4" fill="#3c3c3c"/>
+    <rect x="8" y="33" width="38" height="4" fill="#3c3c3c"/>
+  </g>
+  <g transform="translate(204 26) rotate(7)">
+    <rect width="66" height="50" fill="#8a8a8a" stroke="#222" stroke-width="4"/>
+    <rect x="8" y="10" width="50" height="5" fill="#2a2a2a"/>
+    <rect x="8" y="22" width="50" height="4" fill="#3c3c3c"/>
+    <rect x="8" y="33" width="34" height="4" fill="#3c3c3c"/>
+  </g>
+  <g transform="translate(236 116) rotate(-5)">
+    <rect width="54" height="44" fill="#909090" stroke="#222" stroke-width="4"/>
+    <rect x="7" y="9" width="40" height="5" fill="#2a2a2a"/>
+    <rect x="7" y="20" width="40" height="4" fill="#3c3c3c"/>
+  </g>
+
+  <!-- pressure marks -->
+  <path d="M84 128 l-16 -12 M92 112 l-8 -18 M172 118 l16 -12" stroke="#333" stroke-width="5" stroke-linecap="round"/>
+</svg>

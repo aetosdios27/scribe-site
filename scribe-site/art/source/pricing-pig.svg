@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="pigbody" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#9a9a9a"/>
+      <stop offset="100%" stop-color="#3c3c3c"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b0b0b0"/>
+      <stop offset="100%" stop-color="#4a4a4a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ground shadow -->
+  <ellipse cx="200" cy="352" rx="120" ry="12" fill="#c8c8c8"/>
+
+  <!-- legs -->
+  <rect x="118" y="308" width="24" height="42" fill="#2e2e2e"/>
+  <rect x="168" y="308" width="24" height="42" fill="#363636"/>
+  <rect x="248" y="308" width="24" height="42" fill="#2e2e2e"/>
+  <rect x="298" y="308" width="24" height="42" fill="#363636"/>
+
+  <!-- body -->
+  <rect x="76" y="168" width="248" height="152" rx="72" fill="url(#pigbody)"/>
+
+  <!-- snout -->
+  <rect x="56" y="216" width="38" height="46" rx="10" fill="#565656"/>
+  <rect x="64" y="228" width="6" height="20" fill="#1e1e1e"/>
+  <rect x="76" y="228" width="6" height="20" fill="#1e1e1e"/>
+
+  <!-- ear -->
+  <polygon points="122,176 148,122 176,176" fill="#464646"/>
+
+  <!-- tail curl -->
+  <path d="M330 226 q20 -8 17 12 q-2 14 -16 10" fill="none" stroke="#2a2a2a" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- coin slot -->
+  <rect x="164" y="162" width="96" height="11" rx="5.5" fill="#161616"/>
+
+  <!-- coin dropping in -->
+  <circle cx="212" cy="112" r="30" fill="url(#coin)" stroke="#1c1c1c" stroke-width="5"/>
+  <circle cx="212" cy="112" r="17" fill="none" stroke="#2c2c2c" stroke-width="4"/>
+</svg>

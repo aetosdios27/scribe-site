@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 640" width="600" height="640">
+  <defs>
+    <radialGradient id="sphere" cx="38%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#e8e8e8"/>
+      <stop offset="45%" stop-color="#8a8a8a"/>
+      <stop offset="100%" stop-color="#161616"/>
+    </radialGradient>
+  </defs>
+
+  <!-- the website world - rings and satellites are live svg overlays -->
+  <circle cx="300" cy="310" r="172" fill="url(#sphere)"/>
+</svg>

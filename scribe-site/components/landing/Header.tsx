@@ -8,22 +8,20 @@ export function Header() {
       <div className="shell flex h-14 items-center justify-between gap-6">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2"
-          aria-label="scribe — home"
+          className="flex shrink-0 items-baseline gap-1.5"
+          aria-label="scribe home"
         >
-          <span
-            aria-hidden="true"
-            className="font-mono text-sm tracking-tight text-scribe-ink"
-          >
+          {/* isolated mark — replaced by the final vector mark in a later phase */}
+          <span aria-hidden="true" className="brand-mark text-sm text-scribe-ink">
             {"{s}"}
           </span>
-          <span className="font-mono text-sm font-semibold tracking-tight">
+          <span className="font-sans text-base font-bold tracking-tight">
             scribe
           </span>
         </Link>
 
         <nav aria-label="primary" className="hidden md:block">
-          <ul className="flex items-center gap-7 font-mono text-sm">
+          <ul className="flex items-center gap-7 font-mono text-[13px] tracking-tight">
             {NAV_ITEMS.map((item) => (
               <li key={item.label}>
                 <Link
@@ -44,7 +42,7 @@ export function Header() {
           />
           <Link
             href="#join-beta"
-            className="inline-flex h-9 items-center gap-2 rounded-xs border border-scribe-cobalt bg-scribe-cobalt px-4 font-mono text-sm text-scribe-white transition-colors hover:border-scribe-cobalt-dark hover:bg-scribe-cobalt-dark"
+            className="inline-flex h-9 items-center gap-2 rounded-xs border border-scribe-cobalt bg-scribe-cobalt px-4 font-mono text-[13px] font-semibold text-scribe-white transition-colors hover:border-scribe-cobalt-dark hover:bg-scribe-cobalt-dark"
           >
             join beta
             <span aria-hidden="true">→</span>
@@ -53,7 +51,7 @@ export function Header() {
           <details className="group relative md:hidden">
             <summary
               aria-label="open navigation menu"
-              className="flex h-9 cursor-pointer list-none items-center rounded-xs border border-scribe-rule-strong px-3 font-mono text-sm select-none"
+              className="flex h-9 cursor-pointer list-none items-center rounded-xs border border-scribe-rule-strong px-3 font-mono text-[13px] select-none"
             >
               menu
             </summary>
@@ -61,7 +59,7 @@ export function Header() {
               aria-label="mobile"
               className="absolute top-[calc(100%+0.75rem)] right-0 w-44 rounded-xs border border-scribe-rule-strong bg-scribe-paper-raised p-1"
             >
-              <ul className="font-mono text-sm">
+              <ul className="font-mono text-[13px]">
                 {NAV_ITEMS.map((item) => (
                   <li key={item.label}>
                     <Link

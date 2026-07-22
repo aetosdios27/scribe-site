@@ -19,12 +19,12 @@ export function ValueStrip() {
             <div key={value.title} className="bg-scribe-paper p-6">
               <IconPlaceholder
                 name={value.icon}
-                className="size-5 text-scribe-ink"
+                className="size-6 text-scribe-ink"
               />
-              <h3 className="mt-4 text-sm font-semibold tracking-tight">
+              <h3 className="mt-4 font-mono text-[15px] font-bold tracking-tight">
                 {value.title}
               </h3>
-              <p className="mt-2 text-xs leading-relaxed text-scribe-muted">
+              <p className="mt-2 font-sans text-sm leading-relaxed text-scribe-ink/70">
                 {value.copy}
               </p>
             </div>
