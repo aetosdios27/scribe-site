@@ -172,6 +172,7 @@ const ASSETS: AssetJob[] = [
 const FIELDS = [
   { file: "card-field.png", tile: 96, lum: 0.78, presetName: "hover" as const },
   { file: "pricing-field.png", tile: 128, lum: 0.66, presetName: "hoverPro" as const },
+  { file: "footer-field.png", tile: 96, lum: 0.72, presetName: "hover" as const },
 ];
 
 async function main() {

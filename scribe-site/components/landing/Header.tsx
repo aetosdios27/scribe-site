@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { NAV_ITEMS } from "./content";
 import { IconPlaceholder } from "./IconPlaceholder";
+import { InstallCommandCopy } from "./InstallCommandCopy";
 
 export function Header() {
   return (
@@ -8,16 +10,17 @@ export function Header() {
       <div className="shell flex h-14 items-center justify-between gap-6">
         <Link
           href="/"
-          className="flex shrink-0 items-baseline gap-1.5"
+          className="shrink-0"
           aria-label="scribe home"
         >
-          {/* isolated mark — replaced by the final vector mark in a later phase */}
-          <span aria-hidden="true" className="brand-mark text-sm text-scribe-ink">
-            {"{s}"}
-          </span>
-          <span className="font-sans text-base font-bold tracking-tight">
-            scribe
-          </span>
+          <Image
+            src="/brand/wordmarks/scribe-wordmark-transparent-1200x300.png"
+            width={1200}
+            height={300}
+            alt="Scribe"
+            priority
+            className="h-7 w-auto"
+          />
         </Link>
 
         <nav aria-label="primary" className="hidden md:block">
@@ -40,13 +43,7 @@ export function Header() {
             name="asterisk"
             className="hidden size-4 text-scribe-ink sm:block"
           />
-          <Link
-            href="#join-beta"
-            className="inline-flex h-9 items-center gap-2 rounded-xs border border-scribe-cobalt bg-scribe-cobalt px-4 font-mono text-[13px] font-semibold text-scribe-white transition-colors hover:border-scribe-cobalt-dark hover:bg-scribe-cobalt-dark"
-          >
-            join beta
-            <span aria-hidden="true">→</span>
-          </Link>
+          <InstallCommandCopy variant="nav" />
 
           <details className="group relative md:hidden">
             <summary

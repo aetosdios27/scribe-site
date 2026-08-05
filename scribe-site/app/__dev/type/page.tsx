@@ -72,12 +72,11 @@ export default function TypeSpecimen() {
       </h2>
       <div className="border-b border-scribe-rule py-8">
         <p className="hero-heading">
-          <span className="block">your best</span>
-          <span className="block">ideas belong</span>
-          <span className="block">
-            <span>on your&nbsp;</span>
-            <span className="hero-pixel-word">website.</span>
+          <span className="hero-line">your best</span>
+          <span className="hero-line">
+            <span className="hero-pixel-word">ideas</span> belong
           </span>
+          <span className="hero-line">on your website.</span>
         </p>
       </div>
 
@@ -105,10 +104,10 @@ export default function TypeSpecimen() {
       <h2 className="mt-14 font-mono text-xs text-scribe-muted">
         / pixel interruptions
       </h2>
-      <Row label="beta badge">
+      <Row label="public alpha badge">
         <p className="inline-flex items-center gap-2 rounded-xs border border-scribe-rule-strong px-2 py-1 font-pixel text-xs text-scribe-cobalt">
           <span aria-hidden="true" className="size-1.5 bg-scribe-cobalt" />
-          v0.1.0 beta is live
+          public alpha is live
         </p>
       </Row>
       <Row label="most popular">
@@ -123,7 +122,7 @@ export default function TypeSpecimen() {
       </Row>
       <Row label="microcopy">
         <p className="bg-scribe-cobalt px-3 py-2 font-pixel text-xs text-scribe-paper/80">
-          no credit card. just your email.
+          public alpha. install with bun.
         </p>
       </Row>
 
@@ -181,8 +180,9 @@ export default function TypeSpecimen() {
             className="border-t border-scribe-rule-faint"
             style={{ fontSize: `${rem}rem`, lineHeight: 1.1 }}
           >
-            <span className="font-sans font-bold">on your&nbsp;</span>
-            <span className="hero-pixel-word">website.</span>
+            <span className="font-sans font-bold">your best&nbsp;</span>
+            <span className="hero-pixel-word">ideas</span>
+            <span className="font-sans font-bold">&nbsp;belong</span>
             <span className="font-mono text-scribe-muted"> / scribe.md</span>
           </p>
         </Row>

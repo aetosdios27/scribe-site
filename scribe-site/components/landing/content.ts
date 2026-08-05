@@ -11,12 +11,8 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "docs", href: "#" },
-  { label: "studio", href: "#studio" },
-  { label: "cli", href: "#" },
-  { label: "blog", href: "#" },
-  { label: "pricing", href: "#pricing" },
-  { label: "github", href: "#" },
+  { label: "product", href: "#product" },
+  { label: "github", href: "https://github.com/aetosdios27/scribe-site" },
 ];
 
 export type Truth = {
@@ -143,7 +139,7 @@ export const PRICING_TIERS: PricingTier[] = [
       { label: "basic themes" },
       { label: "community support" },
     ],
-    cta: { label: "start free", href: "#join-beta" },
+    cta: { label: "start free", href: "#install" },
   },
   {
     name: "pro",
@@ -157,7 +153,7 @@ export const PRICING_TIERS: PricingTier[] = [
       { label: "priority support" },
       { label: "analytics", soon: true },
     ],
-    cta: { label: "get pro", href: "#join-beta" },
+    cta: { label: "get pro", href: "#install" },
     popular: true,
   },
   {
@@ -178,64 +174,7 @@ export const PRICING_TIERS: PricingTier[] = [
 
 export const STACK: string[] = ["Next.js", "Vite", "Astro", "Remix", "plain HTML"];
 
-export type FooterColumn = {
-  title: string;
-  links: NavItem[];
-};
-
-export const FOOTER_COLUMNS: FooterColumn[] = [
-  {
-    title: "product",
-    links: [
-      { label: "studio", href: "#studio" },
-      { label: "cli", href: "#" },
-      { label: "pricing", href: "#pricing" },
-      { label: "changelog", href: "#" },
-    ],
-  },
-  {
-    title: "resources",
-    links: [
-      { label: "docs", href: "#" },
-      { label: "guides", href: "#" },
-      { label: "examples", href: "#" },
-      { label: "blog", href: "#" },
-    ],
-  },
-  {
-    title: "company",
-    links: [
-      { label: "about", href: "#" },
-      { label: "careers", href: "#" },
-      { label: "roadmap", href: "#" },
-      { label: "contact", href: "#" },
-    ],
-  },
-  {
-    title: "support",
-    links: [
-      { label: "help centre", href: "#" },
-      { label: "status", href: "#" },
-      { label: "security", href: "#" },
-      { label: "community", href: "#" },
-    ],
-  },
-  {
-    title: "legal",
-    links: [
-      { label: "privacy policy", href: "#" },
-      { label: "terms of service", href: "#" },
-      { label: "cookie policy", href: "#" },
-      { label: "acceptable use", href: "#" },
-    ],
-  },
-];
-
-export const FOOTER_UTILITY: NavItem[] = [
-  { label: "github", href: "#" },
-  { label: "x", href: "#" },
-  { label: "hello@scribe.dev", href: "mailto:hello@scribe.dev" },
-  { label: "privacy", href: "#" },
-  { label: "terms", href: "#" },
-  { label: "status", href: "#" },
+export const FOOTER_LEGAL: NavItem[] = [
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
 ];

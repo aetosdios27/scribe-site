@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { HERO_TRUTHS } from "./content";
 import { HeroOrbit } from "./HeroOrbit";
 import { IconPlaceholder } from "./IconPlaceholder";
+import { InstallCommandCopy } from "./InstallCommandCopy";
 
 export function Hero() {
   return (
@@ -9,17 +9,16 @@ export function Hero() {
       <div className="flex flex-col lg:col-span-7">
         <p className="inline-flex w-fit items-center gap-2 rounded-xs border border-scribe-rule-strong px-2 py-1 font-pixel text-xs text-scribe-cobalt">
           <span aria-hidden="true" className="size-1.5 bg-scribe-cobalt" />
-          v0.1.0 beta is live
+          public alpha is live
         </p>
 
-        {/* canonical b.1 composition: three deliberate lines, two voices */}
+        {/* canonical b.1: pixel+cobalt hits the payload word — ideas */}
         <h1 className="hero-heading mt-7">
-          <span className="block">your best</span>
-          <span className="block">ideas belong</span>
-          <span className="block">
-            <span className="max-sm:block">on your&nbsp;</span>
-            <span className="hero-pixel-word">website.</span>
+          <span className="hero-line">your best</span>
+          <span className="hero-line">
+            <span className="hero-pixel-word">ideas</span> belong
           </span>
+          <span className="hero-line">on your website.</span>
         </h1>
 
         <p className="mt-8 max-w-[42ch] text-[length:var(--type-body-lg)] leading-[1.55]">
@@ -27,21 +26,15 @@ export function Hero() {
           write, ship, and grow content without fighting their frontend.
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <Link
-            href="#join-beta"
-            className="inline-flex h-11 items-center gap-2 rounded-xs border border-scribe-cobalt bg-scribe-cobalt px-6 font-mono text-sm font-semibold text-scribe-white transition-colors hover:border-scribe-cobalt-dark hover:bg-scribe-cobalt-dark"
+        <div className="hero-install-actions">
+          <InstallCommandCopy variant="full" />
+          <a
+            href="#product"
+            className="inline-flex items-center gap-2 font-mono text-sm text-scribe-ink transition-colors hover:text-scribe-cobalt"
           >
-            join beta
-            <span aria-hidden="true">→</span>
-          </Link>
-          <Link
-            href="#studio"
-            className="inline-flex h-11 items-center gap-2 font-mono text-sm text-scribe-ink transition-colors hover:text-scribe-cobalt"
-          >
-            explore studio
+            watch product film
             <IconPlaceholder name="braces" className="size-4" />
-          </Link>
+          </a>
         </div>
 
         <ul className="mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-scribe-rule pt-8 lg:grid-cols-4">
