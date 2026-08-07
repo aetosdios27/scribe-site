@@ -108,9 +108,6 @@ describe("homepage renovation", () => {
     expect(problemCss).not.toMatch(
       /\.pain-bubble:nth-child\([^)]*\)\s*\{[\s\S]*?transform:\s*rotate/,
     );
-    expect(css).toMatch(
-      /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.problem-pain-moving[\s\S]*?display:\s*none/,
-    );
   });
 
   test("makes one factual ownership pipeline instead of another card grid", () => {

@@ -14,7 +14,6 @@ describe("site motion layer", () => {
     expect(clickSpark).toContain('"use client"');
     expect(clickSpark).toContain("click-spark-canvas");
     expect(clickSpark).toMatch(/addEventListener\(["']pointerdown/);
-    expect(clickSpark).toMatch(/prefers-reduced-motion/);
 
     const css = source("app/globals.css");
     expect(css).toMatch(/\.click-spark-canvas\s*\{[\s\S]*?position:\s*fixed/);
@@ -63,16 +62,23 @@ describe("site motion layer", () => {
     expect(film).not.toContain("Dither");
   });
 
-  test("keeps every new effect inert under prefers-reduced-motion", () => {
+  test("stays free of prefers-reduced-motion gating", () => {
     const css = source("app/globals.css");
-    expect(css).toMatch(
-      /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.problem-punchline-glitch[\s\S]*?display:\s*none/,
-    );
-    expect(css).toMatch(
-      /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.technical-proof-dither[\s\S]*?display:\s*none/,
-    );
+    expect(css).not.toContain("prefers-reduced-motion");
 
-    const clickSpark = source("components/reactbits/click-spark/index.tsx");
-    expect(clickSpark).toMatch(/prefers-reduced-motion/);
+    for (const path of [
+      "components/landing/DitherField.tsx",
+      "components/landing/ProductFilm.tsx",
+      "components/landing/GlobeCanvas.tsx",
+      "components/landing/InstallCommandCopy.tsx",
+      "components/reactbits/click-spark/index.tsx",
+      "components/reactbits/letter-glitch/index.tsx",
+      "components/smoothui/line-by-line-slide/index.tsx",
+      "components/smoothui/shimmer-sweep/index.tsx",
+      "components/smoothui/mask-reveal-up/index.tsx",
+      "components/smoothui/infinite-slider/index.tsx",
+    ]) {
+      expect(source(path)).not.toMatch(/prefers-reduced-motion/);
+    }
   });
 });

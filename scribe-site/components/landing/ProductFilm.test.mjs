@@ -24,17 +24,15 @@ describe("ProductFilm", () => {
     expect(source).not.toMatch(/\scontrols(?:=|\s|>)/);
   });
 
-  test("pauses offscreen and opts out of autoplay for reduced motion", () => {
+  test("pauses offscreen and autoplays when visible", () => {
     expect(existsSync(path)).toBe(true);
     if (!existsSync(path)) return;
 
     const source = readFileSync(path, "utf8");
     expect(source).toContain("IntersectionObserver");
     expect(source).toContain("threshold: 0.15");
-    expect(source).toContain("prefers-reduced-motion: reduce");
     expect(source).toContain("video.pause()");
     expect(source).toContain("video.play()");
-    expect(source).toContain("reducedMotion.matches");
     expect(source).toContain('href="/media/scribe-product-film.mp4"');
   });
 });

@@ -358,7 +358,6 @@ export function GlobeCanvas({ className = "" }: { className?: string }) {
     const uOffset = gl.getUniformLocation(prog, "uOffset");
     const uTime = gl.getUniformLocation(prog, "uTime");
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let raf = 0;
     let running = false;
     let visible = true;
@@ -385,14 +384,14 @@ export function GlobeCanvas({ className = "" }: { className?: string }) {
 
     function frame() {
       const size = resize();
-      const t = reduced.matches ? 0 : (performance.now() - start) / 1000;
+      const t = (performance.now() - start) / 1000;
       gl!.uniform2f(uRes, size.sceneWidth, size.sceneHeight);
       gl!.uniform2f(uOffset, size.offsetX, size.offsetY);
       gl!.uniform1f(uTime, t);
       gl!.clearColor(0, 0, 0, 0);
       gl!.clear(gl!.COLOR_BUFFER_BIT);
       gl!.drawArrays(gl!.TRIANGLES, 0, 3);
-      if (!reduced.matches && running && visible && !document.hidden) {
+      if (running && visible && !document.hidden) {
         raf = requestAnimationFrame(frame);
       } else {
         running = false;
@@ -411,7 +410,7 @@ export function GlobeCanvas({ className = "" }: { className?: string }) {
     frame();
     canvas.dataset.active = "true";
 
-    if (!reduced.matches) play();
+    play();
 
     const io = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
@@ -433,20 +432,13 @@ export function GlobeCanvas({ className = "" }: { className?: string }) {
         play();
       }
     };
-    const onReduced = () => {
-      cancelAnimationFrame(raf);
-      running = false;
-      play();
-    };
     document.addEventListener("visibilitychange", onVis);
-    reduced.addEventListener("change", onReduced);
 
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
       document.removeEventListener("visibilitychange", onVis);
-      reduced.removeEventListener("change", onReduced);
       gl.deleteProgram(prog);
       gl.deleteBuffer(buf);
       gl.deleteShader(vs);

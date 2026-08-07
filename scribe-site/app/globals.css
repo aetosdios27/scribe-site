@@ -722,31 +722,9 @@ summary::-webkit-details-marker {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .problem-pain-moving {
-    display: none;
-  }
-
-  .problem-pain-static {
-    display: block;
-    padding-block: 2rem;
-  }
-
-  .problem-pain-static .pain-bubble-list {
-    width: 100%;
-    height: 100%;
-    align-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 0.75rem 1rem;
-    padding: 0;
-  }
-}
-
 /* ---------------------------------------------------------------------------
    install command — one clipboard interaction, scaled by context
 --------------------------------------------------------------------------- */
-
 .install-copy-button-root {
   display: inline-flex;
   min-width: 0;
@@ -1371,16 +1349,6 @@ pre code {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .footer-press-sweep {
-    display: none;
-  }
-
-  .footer-wordmark-ink {
-    mask-position: 5% 0;
-  }
-}
-
 /* ---------------------------------------------------------------------------
    footer — restrained public-alpha close
    calm cobalt field, one brand block, public links, and a single utility rule
@@ -1528,22 +1496,5 @@ pre code {
     align-items: flex-start;
     flex-direction: column;
     gap: 1.125rem;
-  }
-}
-
-/* keep the page inert for reduced-motion users */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  .problem-punchline-glitch,
-  .technical-proof-dither {
-    display: none;
   }
 }

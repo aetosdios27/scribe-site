@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useReducedMotion } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { useRef, useSyncExternalStore } from "react";
 
 export interface LineByLineSlideProps {
@@ -29,14 +29,13 @@ export default function LineByLineSlide({
 }: LineByLineSlideProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
-  const shouldReduceMotion = useReducedMotion();
   // Server markup stays visible without JavaScript. React switches to the
   // animated snapshot only after hydration, without an effect-driven render.
   const motionReady = useSyncExternalStore(subscribe, () => true, () => false);
 
   const lines = linesProp ?? (children ? children.split("\n") : []);
   const label = lines.join(" ");
-  const staticText = !motionReady || shouldReduceMotion;
+  const staticText = !motionReady;
   const play = staticText || !triggerOnView || inView;
 
   return (

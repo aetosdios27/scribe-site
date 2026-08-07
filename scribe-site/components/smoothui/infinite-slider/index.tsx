@@ -1,6 +1,6 @@
 "use client";
 
-import { animate, motion, useInView, useMotionValue, useReducedMotion } from "motion/react";
+import { animate, motion, useInView, useMotionValue } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
 
@@ -23,13 +23,12 @@ export default function InfiniteSlider({
   const [sequenceRef, { width }] = useMeasure();
   const translation = useMotionValue(0);
   const isInView = useInView(viewportRef, { amount: 0.05 });
-  const shouldReduceMotion = useReducedMotion();
   const [isPaused, setIsPaused] = useState(false);
   const [cycle, setCycle] = useState(0);
 
   useEffect(() => {
     const distance = width + gap;
-    if (!distance || shouldReduceMotion || isPaused || !isInView) return;
+    if (!distance || isPaused || !isInView) return;
 
     if (reverse && translation.get() === 0) translation.set(-distance);
 
@@ -45,7 +44,7 @@ export default function InfiniteSlider({
     });
 
     return () => controls.stop();
-  }, [cycle, gap, isInView, isPaused, reverse, shouldReduceMotion, speed, translation, width]);
+  }, [cycle, gap, isInView, isPaused, reverse, speed, translation, width]);
 
   return (
     <div

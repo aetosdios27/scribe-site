@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useSyncExternalStore } from "react";
 import Dither from "@/components/reactbits/dither";
 
 const PAPER = [0.9686, 0.9647, 0.9451] as const;
@@ -51,27 +50,32 @@ export interface DitherFieldProps {
   className?: string;
 }
 
+const subscribeClient = () => () => {};
+
 export function DitherField({
   variant,
   geometry = "flow",
   className,
 }: DitherFieldProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mounted = useInView(ref, { margin: "300px 0px", once: true });
-  const visible = useInView(ref, { margin: "100px 0px" });
-  const reducedMotion = useReducedMotion();
+  const isClient = useSyncExternalStore(
+    subscribeClient,
+    () => true,
+    () => false,
+  );
 
   const backgroundColor = variant === "paper" ? PAPER : COBALT;
   const waveColor = variant === "paper" ? COBALT : PAPER;
 
   return (
-    <div ref={ref} className={className} aria-hidden="true">
-      {mounted && !reducedMotion ? (
+    <div className={className} aria-hidden="true">
+      {/* mount on client load (not on scroll) and keep animating so the
+          dither is warm the moment it enters the viewport */}
+      {isClient ? (
         <Dither
           backgroundColor={[...backgroundColor]}
           waveColor={[...waveColor]}
           enableMouseInteraction={false}
-          frameloop={visible ? "always" : "never"}
+          frameloop="always"
           {...GEOMETRY[geometry]}
         />
       ) : null}

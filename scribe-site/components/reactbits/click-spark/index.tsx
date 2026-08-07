@@ -2,8 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
 interface Spark {
   x: number;
   y: number;
@@ -36,8 +34,6 @@ export default function ClickSpark({
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-
-    const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY);
 
     const resizeCanvas = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -86,8 +82,6 @@ export default function ClickSpark({
     };
 
     const handlePointerDown = (event: PointerEvent) => {
-      if (reducedMotion.matches) return;
-
       const now = performance.now();
       const x = event.clientX;
       const y = event.clientY;

@@ -45,3 +45,6 @@ next-env.d.ts
 
 # test artifacts
 /test-results/
+
+# private superpowers planning docs
+/docs/superpowers/

@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
 export function ProductFilm() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [canAutoPlay, setCanAutoPlay] = useState(false);
@@ -12,14 +10,12 @@ export function ProductFilm() {
     const video = videoRef.current;
     if (!video) return;
 
-    const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY);
     let visible = false;
 
     const syncPlayback = () => {
-      const shouldPlay = visible && !reducedMotion.matches;
-      setCanAutoPlay(shouldPlay);
+      setCanAutoPlay(visible);
 
-      if (shouldPlay) {
+      if (visible) {
         void video.play().catch(() => {
           setCanAutoPlay(false);
         });
@@ -37,11 +33,9 @@ export function ProductFilm() {
     );
 
     observer.observe(video);
-    reducedMotion.addEventListener("change", syncPlayback);
 
     return () => {
       observer.disconnect();
-      reducedMotion.removeEventListener("change", syncPlayback);
       video.pause();
     };
   }, []);

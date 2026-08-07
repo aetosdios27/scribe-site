@@ -2,8 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
-
 interface GlitchLetter {
   char: string;
   color: string;
@@ -137,7 +135,6 @@ export default function LetterGlitch({
     const parent = canvas.parentElement;
     if (!parent) return;
 
-    const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY);
     contextRef.current = canvas.getContext("2d");
 
     const resizeCanvas = () => {
@@ -165,7 +162,7 @@ export default function LetterGlitch({
     };
 
     const startLoop = () => {
-      if (!reducedMotion.matches && animationRef.current === null) {
+      if (animationRef.current === null) {
         animationRef.current = requestAnimationFrame(tick);
       }
     };
@@ -178,15 +175,6 @@ export default function LetterGlitch({
 
     startLoop();
 
-    const reducedMotionChanged = () => {
-      if (reducedMotion.matches) {
-        stopLoop();
-      } else {
-        startLoop();
-      }
-    };
-    reducedMotion.addEventListener("change", reducedMotionChanged);
-
     let resizeTimeout: ReturnType<typeof setTimeout>;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
@@ -196,7 +184,6 @@ export default function LetterGlitch({
 
     return () => {
       stopLoop();
-      reducedMotion.removeEventListener("change", reducedMotionChanged);
       window.removeEventListener("resize", handleResize);
       clearTimeout(resizeTimeout);
     };

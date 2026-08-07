@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SCRIBE_BOOTSTRAP_COMMAND } from "./install-command";
 
@@ -56,7 +56,6 @@ function CopyButton({
   const [state, setState] = useState<CopyState>("idle");
   const pendingRef = useRef(false);
   const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const shouldReduceMotion = useReducedMotion();
 
   useEffect(
     () => () => {
@@ -92,10 +91,10 @@ function CopyButton({
         <AnimatePresence initial={false} mode="wait">
           <motion.span
             animate={{ opacity: 1, y: 0 }}
-            exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 3 }}
-            initial={shouldReduceMotion ? false : { opacity: 0, y: -3 }}
+            exit={{ opacity: 0, y: 3 }}
+            initial={{ opacity: 0, y: -3 }}
             key={state}
-            transition={{ duration: shouldReduceMotion ? 0 : 0.14 }}
+            transition={{ duration: 0.14 }}
           >
             {state === "idle" ? (
               navResponsive ? (
