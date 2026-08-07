@@ -12,7 +12,7 @@ export type NavItem = {
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "product", href: "#product" },
-  { label: "github", href: "https://github.com/aetosdios27/scribe-site" },
+  { label: "github", href: "https://github.com/aetosdios27/scribe" },
 ];
 
 export type Truth = {

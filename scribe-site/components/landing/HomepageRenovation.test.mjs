@@ -141,7 +141,7 @@ describe("homepage renovation", () => {
     const content = source("components/landing/content.ts");
     expect(content).toContain('{ label: "product", href: "#product" }');
     expect(content).toContain(
-      '{ label: "github", href: "https://github.com/aetosdios27/scribe-site" }',
+      '{ label: "github", href: "https://github.com/aetosdios27/scribe" }',
     );
     expect(content).not.toContain('{ label: "pricing"');
     expect(content).not.toContain('{ label: "studio"');

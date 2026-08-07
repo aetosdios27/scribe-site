@@ -12,7 +12,7 @@ describe("Footer", () => {
     expect(html).toContain("developer-native publishing for your own site.");
     expect(html).toContain("hello@scribe.dev");
     expect(html).toContain(
-      'href="https://github.com/aetosdios27/scribe-site"',
+      'href="https://github.com/aetosdios27/scribe"',
     );
     expect(html).toContain(">GitHub<");
     expect(html).toContain("© ");

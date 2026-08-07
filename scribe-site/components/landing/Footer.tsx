@@ -18,7 +18,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="public links" className="footer-public-links">
-            <Link href="https://github.com/aetosdios27/scribe-site">
+            <Link href="https://github.com/aetosdios27/scribe">
               GitHub
             </Link>
           </nav>
