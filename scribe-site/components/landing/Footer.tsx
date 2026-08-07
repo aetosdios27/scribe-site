@@ -12,7 +12,7 @@ export function Footer() {
             <p className="footer-brand-description">
               developer-native publishing for your own site.
             </p>
-            <Link className="footer-email" href="mailto:hello@scribe.dev">
+            <Link className="footer-email" href="mailto:aetosdios27@gmail.com">
               aetosdios27@gmail.com
             </Link>
           </div>
