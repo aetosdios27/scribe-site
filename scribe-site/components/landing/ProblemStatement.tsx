@@ -1,5 +1,7 @@
 import InfiniteSlider from "@/components/smoothui/infinite-slider";
 import MaskRevealUp from "@/components/smoothui/mask-reveal-up";
+import LineByLineSlide from "@/components/smoothui/line-by-line-slide";
+import LetterGlitch from "@/components/reactbits/letter-glitch";
 
 const painMessages = [
   "i just wanted to write bro",
@@ -18,7 +20,7 @@ const painMessages = [
 
 const topLane = [0, 1, 2, 3, 4, 5] as const;
 const bottomLane = [6, 7, 8, 9, 10, 11] as const;
-const mobileMessages = [0, 1, 3, 5, 6, 8, 10, 11] as const;
+const mobileMessages = [0, 1, 3, 5, 6, 8, 7] as const;
 
 const bubbleClass = (index: number) => {
   if (index === 1 || index === 10) return "pain-bubble pain-bubble--large";
@@ -44,12 +46,13 @@ function PainLane({ indices }: { indices: readonly number[] }) {
 
 export function ProblemStatement() {
   return (
-    <section id="problem" aria-labelledby="problem-heading">
+    <section id="problem" className="scroll-mt-16" aria-labelledby="problem-heading">
       <div className="problem-setup">
         <div className="shell problem-setup-inner">
           <h2 id="problem-heading" className="problem-setup-copy">
             <MaskRevealUp
               lines={["you wanted", "to write blogs", "so why don’t you?"]}
+              delays={[0, 0.08, 0.36]}
             />
           </h2>
         </div>
@@ -86,15 +89,20 @@ export function ProblemStatement() {
 
       <div className="problem-recognition">
         <div className="shell">
-          <p className="problem-recognition-copy">
-            <span>oh right...</span>
-            <span>yeah we feel the same</span>
-          </p>
+          <LineByLineSlide
+            className="problem-recognition-copy"
+            lines={["oh right...", "yeah we feel the same"]}
+            triggerOnView
+            stagger={160}
+          />
         </div>
       </div>
 
       <div className="problem-punchline-ribbon">
-        <div className="shell">
+        <div aria-hidden="true" className="problem-punchline-glitch">
+          <LetterGlitch glitchSpeed={45} />
+        </div>
+        <div className="shell problem-punchline-shell">
           <p className="problem-punchline-copy">fuck frontend.</p>
         </div>
       </div>

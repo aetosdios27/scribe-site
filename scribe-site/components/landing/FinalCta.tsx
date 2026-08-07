@@ -1,4 +1,5 @@
 import { InstallCommandCopy } from "./InstallCommandCopy";
+import ShimmerSweep from "@/components/smoothui/shimmer-sweep";
 
 export function FinalCta() {
   return (
@@ -10,8 +11,12 @@ export function FinalCta() {
       <div className="shell final-cta-inner">
         <div>
           <h2 id="cta-heading" className="final-cta-heading">
-            <span className="block">stop fighting your frontend.</span>
-            <span className="block">start publishing what matters.</span>
+            <ShimmerSweep className="block" triggerOnView>
+              stop fighting your frontend.
+            </ShimmerSweep>
+            <ShimmerSweep className="block" triggerOnView delay={140}>
+              start publishing what matters.
+            </ShimmerSweep>
           </h2>
         </div>
 

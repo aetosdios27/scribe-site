@@ -7,7 +7,7 @@ import { InstallCommandCopy } from "./InstallCommandCopy";
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-scribe-rule bg-scribe-paper">
-      <div className="shell flex h-14 items-center justify-between gap-6">
+      <div className="shell flex h-16 items-center justify-between gap-4 md:h-14 md:gap-6">
         <Link
           href="/"
           className="shrink-0"

@@ -8,6 +8,7 @@ export interface MaskRevealUpProps {
   className?: string;
   delay?: number;
   stagger?: number;
+  delays?: readonly number[];
 }
 
 const VISIBLE = { opacity: 1, y: 0 };
@@ -20,6 +21,7 @@ export default function MaskRevealUp({
   className,
   delay = 0,
   stagger = 0.08,
+  delays,
 }: MaskRevealUpProps) {
   const rootRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(rootRef, { amount: 0.25, once: true });
@@ -41,7 +43,7 @@ export default function MaskRevealUp({
               staticText
                 ? { duration: 0 }
                 : {
-                    delay: delay + index * stagger,
+                    delay: delay + (delays?.[index] ?? index * stagger),
                     duration: 0.62,
                     ease: EASE,
                   }

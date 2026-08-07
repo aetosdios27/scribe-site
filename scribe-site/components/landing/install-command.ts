@@ -1,2 +1,8 @@
-export const SCRIBE_INSTALL_COMMAND =
-  "bun add @scribe-sdk/react@alpha @scribe-sdk/styles@alpha @scribe-sdk/mdx@alpha && bun add --dev @scribe-sdk/cli@alpha";
+export const SCRIBE_BOOTSTRAP_COMMAND =
+  "bunx @scribe-sdk/cli@alpha integrate";
+
+export const SCRIBE_DRY_RUN_COMMAND =
+  "bunx @scribe-sdk/cli@alpha integrate --dry-run";
+
+export const SCRIBE_GLOBAL_INSTALL_COMMAND =
+  "bun add --global @scribe-sdk/cli@alpha";

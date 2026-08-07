@@ -107,8 +107,15 @@ summary::-webkit-details-marker {
   display: none;
 }
 
-/* shared page shell — one max width, responsive gutters */
-.shell {
+/* document-level spark burst on pointerdown — layered over the whole page */
+.click-spark-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* shared page shell — one max width, responsive gutters */.shell {
   width: 100%;
   max-width: var(--scribe-max-width);
   margin-inline: auto;
@@ -210,16 +217,15 @@ summary::-webkit-details-marker {
 }
 
 .problem-setup-inner {
-  padding-block: clamp(7rem, 14vh, 10rem);
+  padding-block: clamp(2.5rem, 5vw, 5rem);
 }
 
 .problem-setup-copy {
-  max-width: 14ch;
   margin: 0;
   font-family: var(--font-sans);
-  font-size: clamp(3.5rem, 7.7vw, 7.6rem);
+  font-size: clamp(3.75rem, 6.5vw, 7.5rem);
   font-weight: 700;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.055em;
   line-height: 0.88;
 }
 
@@ -235,8 +241,8 @@ summary::-webkit-details-marker {
   padding-bottom: 0.2em;
 }
 
-.mask-reveal-line:nth-child(3) {
-  margin-top: 0.48em;
+.problem-setup-copy .mask-reveal-line:nth-child(3) {
+  margin-top: 0;
 }
 
 .problem-pain-ribbon {
@@ -360,8 +366,36 @@ summary::-webkit-details-marker {
 }
 
 .problem-punchline-ribbon {
+  position: relative;
+  overflow: clip;
   padding-block: clamp(6.5rem, 8vw, 8rem);
   background: var(--scribe-cobalt);
+}
+
+/* contained glitch interference behind the punchline — decorative only */
+.problem-punchline-glitch {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.letter-glitch {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.letter-glitch canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.problem-punchline-shell {
+  position: relative;
+  z-index: 1;
 }
 
 .problem-punchline-copy {
@@ -457,19 +491,50 @@ summary::-webkit-details-marker {
 }
 
 .technical-proof-stage {
+  position: relative;
   display: flex;
   min-height: clamp(22rem, 34vw, 32rem);
   flex-direction: column;
   padding: clamp(1.25rem, 2.6vw, 2.5rem);
 }
 
+/* full-card dither field — the living signal sits as the lowest layer,
+   with the card copy laid on top of it */
+.technical-proof-dither {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.technical-proof-index,
+.technical-proof-stage h3,
+.technical-proof-stage ul {
+  position: relative;
+  z-index: 2;
+}
+
+.technical-proof-dither canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .technical-proof-stage + .technical-proof-stage {
   border-left: 1px solid var(--scribe-ink);
 }
 
-.technical-proof-stage:nth-child(2) {
+/* dither-tinted cards: outer cards ride dark cobalt for white text,
+   the middle card reads light paper for cobalt text */
+.technical-proof-stage:nth-child(1),
+.technical-proof-stage:nth-child(3) {
   background: var(--scribe-cobalt);
-  color: var(--scribe-white);
+  color: var(--scribe-ink);
+}
+
+.technical-proof-stage:nth-child(2) {
+  background: var(--scribe-paper);
+  color: var(--scribe-cobalt);
 }
 
 .technical-proof-index {
@@ -526,17 +591,22 @@ summary::-webkit-details-marker {
 
 @media (max-width: 767px) {
   .problem-setup-inner {
-    padding-block: clamp(5.5rem, 22vw, 7rem);
+    padding-block: clamp(4rem, 18vw, 5.5rem);
   }
 
   .problem-setup-copy {
-    max-width: 11ch;
-    font-size: clamp(3rem, 15vw, 4.5rem);
+    max-width: none;
+    font-size: clamp(2.75rem, 13vw, 3.5rem);
+    letter-spacing: -0.045em;
     line-height: 0.92;
   }
 
+  .problem-setup-copy .mask-reveal-line:nth-child(3) {
+    margin-top: 0;
+  }
+
   .problem-pain-ribbon {
-    height: clamp(15rem, 72vw, 19rem);
+    height: auto;
   }
 
   .problem-pain-moving {
@@ -545,13 +615,13 @@ summary::-webkit-details-marker {
 
   .problem-pain-static {
     display: block;
-    padding-block: clamp(1.5rem, 6vw, 2rem);
+    padding-block: clamp(1.75rem, 6vw, 2.25rem);
   }
 
   .problem-pain-static .pain-bubble-list {
     width: 100%;
-    height: 100%;
-    align-content: space-between;
+    height: auto;
+    align-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 0.72rem 0.8rem;
@@ -586,12 +656,16 @@ summary::-webkit-details-marker {
     padding-block: clamp(5.5rem, 24vw, 7.5rem);
   }
 
-  .problem-punchline-copy {
-    max-width: 7ch;
-    font-size: clamp(4.75rem, 21vw, 7rem);
-    line-height: 0.8;
-    white-space: normal;
-  }
+.problem-punchline-copy {
+  max-width: 7ch;
+  font-size: clamp(4.75rem, 21vw, 7rem);
+  line-height: 0.8;
+  white-space: normal;
+}
+
+.problem-punchline-glitch {
+  opacity: 0.6;
+}
 
   .product-film-viewport {
     margin-right: calc(-1 * var(--scribe-gutter));
@@ -606,7 +680,7 @@ summary::-webkit-details-marker {
   }
 
   .technical-proof-stage {
-    min-height: 24rem;
+    min-height: 0;
   }
 
   .technical-proof-stage + .technical-proof-stage {
@@ -673,7 +747,7 @@ summary::-webkit-details-marker {
    install command — one clipboard interaction, scaled by context
 --------------------------------------------------------------------------- */
 
-.button-copy-root {
+.install-copy-button-root {
   display: inline-flex;
   min-width: 0;
 }
@@ -714,6 +788,25 @@ summary::-webkit-details-marker {
   font-size: 0.8125rem;
 }
 
+.install-copy-nav-label--narrow {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .install-copy-nav-label--narrow {
+    display: inline;
+  }
+
+  .install-copy-nav-label--wide {
+    display: none;
+  }
+
+  .install-copy-button--nav {
+    width: 5.5rem;
+    padding-inline: 0.5rem;
+  }
+}
+
 .install-copy {
   width: 100%;
   min-width: 0;
@@ -730,7 +823,8 @@ summary::-webkit-details-marker {
 
 .install-copy-field {
   display: grid;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   min-width: 0;
   grid-template-columns: minmax(0, 1fr) auto;
   border: 1px solid var(--scribe-ink);
@@ -738,9 +832,10 @@ summary::-webkit-details-marker {
 }
 
 .install-copy-command {
-  display: block;
+  display: flex;
+  align-items: center;
   min-width: 0;
-  overflow-x: visible;
+  overflow-x: auto;
   padding: 1rem 1.1rem;
   color: var(--scribe-ink);
   font-family: var(--font-mono);
@@ -750,9 +845,7 @@ summary::-webkit-details-marker {
   scrollbar-color: var(--scribe-cobalt) transparent;
   scrollbar-width: thin;
   user-select: text;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  white-space: nowrap;
   overscroll-behavior-inline: contain;
 }
 
@@ -808,7 +901,8 @@ pre code {
   width: 100%;
   max-width: 44rem;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -816,7 +910,14 @@ pre code {
   margin: 0;
 }
 
+.final-cta-action .install-copy {
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+}
+
 .final-cta-action .install-copy-label {
+  margin-bottom: 0.75rem;
   font-size: 0.8125rem;
 }
 
@@ -843,14 +944,9 @@ pre code {
 
 @media (max-width: 767px) {
   .final-cta-heading {
-    max-width: 12ch;
-    font-size: clamp(2.8rem, 12vw, 3.75rem);
-    line-height: 0.88;
-  }
-
-  .install-copy-button--nav {
-    width: 7.25rem;
-    padding-inline: 0.65rem;
+    max-width: 14ch;
+    font-size: clamp(2.05rem, 9.5vw, 3.4rem);
+    line-height: 0.96;
   }
 
   .install-copy-command {
@@ -862,6 +958,10 @@ pre code {
     min-width: 5.75rem;
     padding-inline: 0.75rem;
     font-size: 0.75rem;
+  }
+
+  .install-copy-field {
+    min-height: 3.5rem;
   }
 }
 
@@ -1440,5 +1540,10 @@ pre code {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .problem-punchline-glitch,
+  .technical-proof-dither {
+    display: none;
   }
 }

@@ -9,7 +9,7 @@ export function Hero() {
       <div className="flex flex-col lg:col-span-7">
         <p className="inline-flex w-fit items-center gap-2 rounded-xs border border-scribe-rule-strong px-2 py-1 font-pixel text-xs text-scribe-cobalt">
           <span aria-hidden="true" className="size-1.5 bg-scribe-cobalt" />
-          public alpha is live
+          public alpha
         </p>
 
         {/* canonical b.1: pixel+cobalt hits the payload word — ideas */}
@@ -28,6 +28,7 @@ export function Hero() {
 
         <div className="hero-install-actions">
           <InstallCommandCopy variant="full" />
+
           <a
             href="#product"
             className="inline-flex items-center gap-2 font-mono text-sm text-scribe-ink transition-colors hover:text-scribe-cobalt"

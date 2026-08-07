@@ -151,4 +151,39 @@ describe("homepage renovation", () => {
     expect(content).not.toContain('{ label: "cli"');
     expect(content).not.toContain('{ label: "blog"');
   });
+
+  test("renders a static curated pain ribbon for mobile with the exact messages", () => {
+    const problem = source("components/landing/ProblemStatement.tsx");
+    expect(problem).toContain("const mobileMessages = [0, 1, 3, 5, 6, 8, 7]");
+
+    const css = source("app/globals.css");
+    const mobileStart = css.indexOf("@media (max-width: 767px)");
+    const mobileBlock = css.slice(mobileStart);
+
+    expect(mobileBlock).toContain(".problem-pain-ribbon {");
+    expect(mobileBlock).toContain("height: auto");
+    expect(mobileBlock).toContain(
+      ".problem-pain-static .pain-bubble-list",
+    );
+    expect(mobileBlock).toContain("align-content: flex-start");
+    expect(mobileBlock).not.toContain("align-content: space-between");
+
+    expect(mobileBlock).toContain(".technical-proof-stage {");
+    expect(mobileBlock).toContain("min-height: 0");
+    expect(mobileBlock).not.toContain("min-height: 24rem");
+  });
+
+  test("hides decorative marquee clones and keeps one assistive list", () => {
+    const problem = source("components/landing/ProblemStatement.tsx");
+
+    const srOnlyList = problem.indexOf('className="sr-only"');
+    const moving = problem.indexOf('aria-hidden="true" className="problem-pain-moving"');
+    const staticRibbon = problem.indexOf(
+      'aria-hidden="true" className="shell problem-pain-static"',
+    );
+
+    expect(srOnlyList).toBeGreaterThan(-1);
+    expect(moving).toBeGreaterThan(srOnlyList);
+    expect(staticRibbon).toBeGreaterThan(moving);
+  });
 });

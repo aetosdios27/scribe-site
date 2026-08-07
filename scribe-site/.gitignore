@@ -42,3 +42,6 @@ next-env.d.ts
 
 # brainstorm companion session files
 .superpowers/
+
+# test artifacts
+/test-results/

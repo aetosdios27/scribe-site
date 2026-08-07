@@ -1,3 +1,5 @@
+import { DitherField } from "./DitherField";
+
 const STAGES = [
   {
     index: "01 / source",
@@ -27,7 +29,7 @@ export function TechnicalProof() {
     <section
       id="technical-proof"
       aria-labelledby="technical-proof-heading"
-      className="technical-proof-section"
+      className="technical-proof-section scroll-mt-16"
     >
       <div className="shell technical-proof-inner">
         <h2 id="technical-proof-heading" className="technical-proof-heading">
@@ -35,8 +37,13 @@ export function TechnicalProof() {
         </h2>
 
         <ol className="technical-proof-pipeline">
-          {STAGES.map((stage) => (
+          {STAGES.map((stage, index) => (
             <li key={stage.title} className="technical-proof-stage">
+              <DitherField
+                variant={index === 1 ? "paper" : "cobalt"}
+                geometry={index === 0 ? "flow-fine" : index === 1 ? "flow-soft" : "flow"}
+                className="technical-proof-dither"
+              />
               <p className="technical-proof-index">{stage.index}</p>
               <h3>{stage.title}</h3>
               <ul>

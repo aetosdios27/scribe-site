@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import ClickSpark from "@/components/reactbits/click-spark";
 import { GeistMono, GeistPixelCircle, texGyreHeros } from "./fonts";
 import "./globals.css";
 
@@ -59,6 +62,9 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-scribe-paper font-sans text-scribe-ink">
         {children}
+        <SmoothScroll />
+        <ClickSpark />
+        <Analytics />
       </body>
     </html>
   );

@@ -4,40 +4,52 @@ import { join } from "node:path";
 
 const root = join(import.meta.dir, "../..");
 const source = (path) => readFileSync(join(root, path), "utf8");
-const command =
-  "bun add @scribe-sdk/react@alpha @scribe-sdk/styles@alpha @scribe-sdk/mdx@alpha && bun add --dev @scribe-sdk/cli@alpha";
+
+const BOOTSTRAP_COMMAND = "bunx @scribe-sdk/cli@alpha integrate";
+const DRY_RUN_COMMAND = "bunx @scribe-sdk/cli@alpha integrate --dry-run";
+
+const productionPaths = [
+  "components/landing/install-command.ts",
+  "components/landing/InstallCommandCopy.tsx",
+  "components/landing/Header.tsx",
+  "components/landing/Hero.tsx",
+  "components/landing/FinalCta.tsx",
+  "app/page.tsx",
+].filter((path) => existsSync(join(root, path)));
 
 describe("Scribe install command CTAs", () => {
-  test("stores the exact public-alpha command once in production source", () => {
+  test("stores the exact bootstrap command once as the source of truth", () => {
     const constantPath = "components/landing/install-command.ts";
     expect(existsSync(join(root, constantPath))).toBe(true);
     if (!existsSync(join(root, constantPath))) return;
 
-    expect(source(constantPath)).toContain(command);
-    const productionPaths = [
-      "components/landing/install-command.ts",
-      "components/landing/InstallCommandCopy.tsx",
-      "components/smoothui/button-copy/index.tsx",
-      "components/landing/Header.tsx",
-      "components/landing/Hero.tsx",
-      "components/landing/FinalCta.tsx",
-    ].filter((path) => existsSync(join(root, path)));
+    const constant = source(constantPath);
+    expect(constant).toContain(`"${BOOTSTRAP_COMMAND}"`);
+    expect(constant).toContain(`"${DRY_RUN_COMMAND}"`);
+    expect(constant).toContain(
+      `"bun add --global @scribe-sdk/cli@alpha"`,
+    );
+
     const occurrences = productionPaths.reduce(
-      (total, path) => total + source(path).split(command).length - 1,
+      (total, path) =>
+        total +
+        source(path).split(`"${BOOTSTRAP_COMMAND}"`).length -
+        1,
       0,
     );
     expect(occurrences).toBe(1);
   });
 
-  test("uses one accessible Scribe-owned copy primitive in all three locations", () => {
+  test("uses one Scribe-owned copy primitive in all three locations", () => {
     const componentPath = "components/landing/InstallCommandCopy.tsx";
     expect(existsSync(join(root, componentPath))).toBe(true);
     if (!existsSync(join(root, componentPath))) return;
 
     const component = source(componentPath);
-    expect(component).toContain("ButtonCopy");
-    expect(component).toContain("SCRIBE_INSTALL_COMMAND");
     expect(component).toContain('variant: "nav" | "full"');
+    expect(component).toContain("SCRIBE_BOOTSTRAP_COMMAND");
+    expect(component).toContain('"install alpha"');
+    expect(component).toContain("Copy Scribe alpha bootstrap command");
 
     const header = source("components/landing/Header.tsx");
     const hero = source("components/landing/Hero.tsx");
@@ -45,53 +57,61 @@ describe("Scribe install command CTAs", () => {
     expect(header).toContain('<InstallCommandCopy variant="nav"');
     expect(hero).toContain('<InstallCommandCopy variant="full"');
     expect(finalCta).toContain('<InstallCommandCopy variant="full"');
-    expect(hero).toContain("public alpha is live");
-
-    for (const content of [header, hero, finalCta]) {
-      expect(content.toLowerCase()).not.toContain("join beta");
-      expect(content.toLowerCase()).not.toContain("join the beta");
-      expect(content.toLowerCase()).not.toContain("request access");
-      expect(content.toLowerCase()).not.toContain("early access");
-      expect(content.toLowerCase()).not.toContain("waitlist");
-    }
+    expect(hero).toContain("public alpha");
   });
 
-  test("adapts Button Copy with honest idle, success, and failure states", () => {
-    const buttonPath = "components/smoothui/button-copy/index.tsx";
-    expect(existsSync(join(root, buttonPath))).toBe(true);
-    if (!existsSync(join(root, buttonPath))) return;
+  test("adapts clipboard behavior with honest idle, success, and failure states", () => {
+    const componentPath = "components/landing/InstallCommandCopy.tsx";
+    expect(existsSync(join(root, componentPath))).toBe(true);
+    if (!existsSync(join(root, componentPath))) return;
 
-    const button = source(buttonPath);
-    expect(button).toContain("navigator.clipboard.writeText");
-    expect(button).toContain("try {");
-    expect(button).toContain("catch");
-    expect(button).toContain('aria-label="Copy Scribe alpha install command"');
-    expect(button).toContain('aria-live="polite"');
-    expect(button).toContain('"copy"');
-    expect(button).toContain('"copied"');
-    expect(button).toContain('"copy failed"');
-    expect(button).toContain("<button");
-    expect(button).not.toContain("execCommand");
+    const component = source(componentPath);
+    expect(component).toContain("navigator.clipboard.writeText");
+    expect(component).toContain("try {");
+    expect(component).toContain("catch");
+    expect(component).toContain('aria-live="polite"');
+    expect(component).toContain('role="status"');
+    expect(component).toContain('"copied"');
+    expect(component).toContain('"copy failed"');
+    expect(component).toContain("<button");
+    expect(component).not.toContain("execCommand");
+    expect(component).not.toContain('variant: "nav" | "full" | "compact"');
   });
 
   test("reports clipboard success and failure without changing the command", async () => {
-    const buttonPath = "components/smoothui/button-copy/index.tsx";
-    expect(existsSync(join(root, buttonPath))).toBe(true);
-    if (!existsSync(join(root, buttonPath))) return;
-
-    const { copyToClipboard } = await import("../smoothui/button-copy/index.tsx");
+    const { copyToClipboard } = await import(
+      "./InstallCommandCopy.tsx"
+    );
     expect(typeof copyToClipboard).toBe("function");
 
     let written = "";
-    const success = await copyToClipboard(command, async (value) => {
+    const success = await copyToClipboard(BOOTSTRAP_COMMAND, async (value) => {
       written = value;
     });
     expect(success).toBe("copied");
-    expect(written).toBe(command);
+    expect(written).toBe(BOOTSTRAP_COMMAND);
 
-    const failure = await copyToClipboard(command, async () => {
+    const failure = await copyToClipboard(BOOTSTRAP_COMMAND, async () => {
       throw new Error("permission denied");
     });
     expect(failure).toBe("failed");
+  });
+
+  test("keeps beta and waitlist language out of every CTA", () => {
+    for (const path of productionPaths) {
+      const content = source(path).toLowerCase();
+      expect(content).not.toContain("join beta");
+      expect(content).not.toContain("join the beta");
+      expect(content).not.toContain("waitlist");
+      expect(content).not.toContain("request access");
+      expect(content).not.toContain("early access");
+    }
+  });
+
+  test("keeps the old four-package command out of production UI", () => {
+    for (const path of productionPaths) {
+      expect(source(path)).not.toContain("bun add @scribe-sdk/react@alpha");
+      expect(source(path)).not.toContain("bun add --dev @scribe-sdk/cli@alpha");
+    }
   });
 });
