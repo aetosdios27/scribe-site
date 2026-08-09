@@ -3,6 +3,7 @@ import Link from "next/link";
 import { NAV_ITEMS } from "./content";
 import { IconPlaceholder } from "./IconPlaceholder";
 import { InstallCommandCopy } from "./InstallCommandCopy";
+import { PublicNavLink } from "./PublicNavLink";
 
 export function Header() {
   return (
@@ -27,12 +28,7 @@ export function Header() {
           <ul className="flex items-center gap-7 font-mono text-[13px] tracking-tight">
             {NAV_ITEMS.map((item) => (
               <li key={item.label}>
-                <Link
-                  href={item.href}
-                  className="text-scribe-ink transition-colors hover:text-scribe-cobalt"
-                >
-                  {item.label}
-                </Link>
+                <PublicNavLink item={item} variant="desktop" />
               </li>
             ))}
           </ul>
@@ -59,12 +55,7 @@ export function Header() {
               <ul className="font-mono text-[13px]">
                 {NAV_ITEMS.map((item) => (
                   <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      className="block px-3 py-2 transition-colors hover:bg-scribe-paper hover:text-scribe-cobalt"
-                    >
-                      {item.label}
-                    </Link>
+                    <PublicNavLink item={item} variant="mobile" />
                   </li>
                 ))}
               </ul>

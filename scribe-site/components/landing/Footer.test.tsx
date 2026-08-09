@@ -10,7 +10,13 @@ describe("Footer", () => {
     expect(html).toContain("footer-simple");
     expect(html).toContain("footer-brand-wordmark");
     expect(html).toContain("developer-native publishing for your own site.");
-    expect(html).toContain("hello@scribe.dev");
+    expect(html).toContain("aetosdios27@gmail.com");
+    expect(html).toContain('href="/roadmap"');
+    expect(html).toContain(
+      'href="https://github.com/aetosdios27/scribe/blob/main/CONTRIBUTING.md"',
+    );
+    expect(html).toContain(">Roadmap<");
+    expect(html).toContain(">Contributing<");
     expect(html).toContain(
       'href="https://github.com/aetosdios27/scribe"',
     );

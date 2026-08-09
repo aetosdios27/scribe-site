@@ -5,6 +5,7 @@ import Dither from "@/components/reactbits/dither";
 
 const PAPER = [0.9686, 0.9647, 0.9451] as const;
 const COBALT = [0.0078, 0.2039, 0.9686] as const;
+const ROADMAP_LAVENDER = [0.69, 0.72, 0.96] as const;
 
 const GEOMETRY = {
   "flow-fine": {
@@ -40,12 +41,23 @@ const GEOMETRY = {
     verticalBias: 0.7,
     intensity: 1,
   },
+  smoke: {
+    patternMode: 2,
+    waveSpeed: 0.014,
+    waveFrequency: 1.15,
+    waveAmplitude: 0.85,
+    colorNum: 4,
+    pixelSize: 2,
+    flowAngle: 0.35,
+    verticalBias: 0.15,
+    intensity: 0.9,
+  },
 } as const;
 
 export type DitherGeometry = keyof typeof GEOMETRY;
 
 export interface DitherFieldProps {
-  variant: "paper" | "cobalt";
+  variant: "paper" | "cobalt" | "roadmap";
   geometry?: DitherGeometry;
   className?: string;
 }
@@ -63,8 +75,18 @@ export function DitherField({
     () => false,
   );
 
-  const backgroundColor = variant === "paper" ? PAPER : COBALT;
-  const waveColor = variant === "paper" ? COBALT : PAPER;
+  const backgroundColor =
+    variant === "paper"
+      ? PAPER
+      : variant === "cobalt"
+        ? COBALT
+        : ROADMAP_LAVENDER;
+  const waveColor =
+    variant === "paper"
+      ? COBALT
+      : variant === "cobalt"
+        ? PAPER
+        : COBALT;
 
   return (
     <div className={className} aria-hidden="true">

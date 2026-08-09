@@ -11,7 +11,8 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "product", href: "#product" },
+  { label: "product", href: "/#product" },
+  { label: "roadmap", href: "/roadmap" },
   { label: "github", href: "https://github.com/aetosdios27/scribe" },
 ];
 

@@ -137,9 +137,10 @@ describe("homepage renovation", () => {
     expect(proof).not.toContain("grid-cols-3");
   });
 
-  test("keeps only working product and GitHub navigation destinations", () => {
+  test("keeps only working product, roadmap, and GitHub navigation destinations", () => {
     const content = source("components/landing/content.ts");
-    expect(content).toContain('{ label: "product", href: "#product" }');
+    expect(content).toContain('{ label: "product", href: "/#product" }');
+    expect(content).toContain('{ label: "roadmap", href: "/roadmap" }');
     expect(content).toContain(
       '{ label: "github", href: "https://github.com/aetosdios27/scribe" }',
     );

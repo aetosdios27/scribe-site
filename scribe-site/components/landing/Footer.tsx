@@ -18,6 +18,10 @@ export function Footer() {
           </div>
 
           <nav aria-label="public links" className="footer-public-links">
+            <Link href="/roadmap">Roadmap</Link>
+            <Link href="https://github.com/aetosdios27/scribe/blob/main/CONTRIBUTING.md">
+              Contributing
+            </Link>
             <Link href="https://github.com/aetosdios27/scribe">
               GitHub
             </Link>

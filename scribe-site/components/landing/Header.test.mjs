@@ -1,11 +1,15 @@
 import { describe, expect, test } from "bun:test";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 describe("Header navigation accessibility", () => {
   const header = readFileSync(
     new URL("./Header.tsx", import.meta.url),
     "utf8",
   );
+  const publicNavLinkUrl = new URL("./PublicNavLink.tsx", import.meta.url);
+  const publicNavLink = existsSync(publicNavLinkUrl)
+    ? readFileSync(publicNavLinkUrl, "utf8")
+    : "";
 
   test("uses a native details/summary disclosure for the narrow menu", () => {
     expect(header).toContain("<details");
@@ -26,5 +30,13 @@ describe("Header navigation accessibility", () => {
     expect(lower).not.toContain("join beta");
     expect(lower).not.toContain("waitlist");
     expect(lower).not.toContain("request access");
+  });
+
+  test("marks the current internal destination in cobalt with white text", () => {
+    expect(header).toContain("<PublicNavLink");
+    expect(publicNavLink).toContain("usePathname");
+    expect(publicNavLink).toContain('aria-current={isCurrent ? "page" : undefined}');
+    expect(publicNavLink).toContain("bg-scribe-cobalt");
+    expect(publicNavLink).toContain("text-scribe-white");
   });
 });

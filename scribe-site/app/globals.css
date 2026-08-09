@@ -1498,3 +1498,423 @@ pre code {
     gap: 1.125rem;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   roadmap — an editorial field report, not a feature-card backlog
+--------------------------------------------------------------------------- */
+
+.roadmap-page {
+  overflow: clip;
+  background: var(--scribe-paper);
+}
+
+.roadmap-intro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid var(--scribe-rule-strong);
+}
+
+.roadmap-intro-dither {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.roadmap-intro-dither::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(247 246 241 / 0.38),
+    rgb(247 246 241 / 0.42)
+  );
+  content: "";
+}
+
+.roadmap-intro-dither canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.roadmap-intro-inner {
+  position: relative;
+  padding-top: clamp(2.25rem, 4vw, 3.75rem);
+  padding-bottom: clamp(4rem, 7vw, 7rem);
+}
+
+.roadmap-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--scribe-rule);
+}
+
+.roadmap-kicker p {
+  margin: 0;
+}
+
+.roadmap-kicker .font-mono {
+  color: var(--scribe-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.roadmap-edition,
+.roadmap-horizon,
+.roadmap-field-label {
+  font-family: var(--font-mono);
+  text-transform: lowercase;
+}
+
+.roadmap-edition {
+  color: var(--scribe-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.roadmap-title-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.55fr);
+  gap: clamp(3rem, 8vw, 9rem);
+  align-items: start;
+  padding-top: clamp(2.75rem, 5vw, 5rem);
+}
+
+.roadmap-title-grid h1 {
+  max-width: 11ch;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(3.75rem, 7.8vw, 8.75rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.roadmap-intro-copy {
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 1rem;
+}
+
+.roadmap-intro-copy p {
+  margin: 0;
+  font-size: clamp(1.125rem, 1.35vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.58;
+}
+
+.roadmap-intro-copy p:last-child {
+  color: var(--scribe-ink);
+}
+
+.roadmap-intro .text-scribe-muted {
+  color: var(--scribe-ink);
+}
+
+.roadmap-phase {
+  border-bottom: 1px solid var(--scribe-rule-strong);
+}
+
+.roadmap-phase:nth-of-type(2) {
+  background: var(--scribe-paper-raised);
+}
+
+.roadmap-phase-grid {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(3rem, 8vw, 9rem);
+  padding-top: clamp(4rem, 7vw, 7rem);
+  padding-bottom: clamp(4.5rem, 8vw, 8rem);
+}
+
+.roadmap-phase-header {
+  position: relative;
+  align-self: start;
+  min-width: 0;
+}
+
+.roadmap-phase-index {
+  margin-left: -0.075em;
+  color: var(--scribe-cobalt);
+  font-family: var(--font-pixel);
+  font-size: clamp(5.5rem, 10vw, 10rem);
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.68;
+}
+
+.roadmap-horizon {
+  width: fit-content;
+  margin: 2.5rem 0 1.25rem;
+  border: 1px solid var(--scribe-rule-strong);
+  padding: 0.4rem 0.55rem 0.36rem;
+  color: var(--scribe-muted);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.roadmap-phase-header h3 {
+  max-width: 15ch;
+  margin: 0;
+  font-size: clamp(2.35rem, 4vw, 4.75rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+  text-wrap: balance;
+}
+
+.roadmap-phase-body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(2.5rem, 6vw, 6rem);
+  align-content: start;
+  border-top: 1px solid var(--scribe-rule-strong);
+}
+
+.roadmap-purpose,
+.roadmap-outcome {
+  padding-block: 1.5rem 3rem;
+}
+
+.roadmap-purpose > p:last-child,
+.roadmap-outcome > p:last-child {
+  margin: 1.25rem 0 0;
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+}
+
+.roadmap-outcome > p:last-child {
+  color: var(--scribe-muted);
+}
+
+.roadmap-field-label {
+  margin: 0;
+  color: var(--scribe-cobalt);
+  font-size: 0.6875rem;
+  letter-spacing: 0.03em;
+}
+
+.roadmap-goals {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--scribe-rule);
+  padding-top: 1.5rem;
+}
+
+.roadmap-goals ol {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.roadmap-goals li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 1rem;
+  border-top: 1px solid var(--scribe-rule-faint);
+}
+
+.roadmap-goals li:first-child {
+  border-top-color: var(--scribe-rule);
+}
+
+.roadmap-goals li > span {
+  color: var(--scribe-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
+.roadmap-goals li > p {
+  max-width: 55rem;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.roadmap-evidence {
+  background: var(--scribe-ink);
+  color: var(--scribe-paper);
+}
+
+.roadmap-evidence-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(20rem, 1.2fr);
+  gap: clamp(3rem, 9vw, 10rem);
+  padding-top: clamp(4.5rem, 8vw, 8rem);
+  padding-bottom: clamp(5rem, 9vw, 9rem);
+}
+
+.roadmap-evidence .font-mono {
+  color: rgb(247 246 241 / 0.55);
+}
+
+.roadmap-evidence h2 {
+  max-width: 7ch;
+  margin: 2rem 0 0;
+  font-family: var(--font-pixel);
+  font-size: clamp(4.5rem, 9vw, 9.5rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.75;
+}
+
+.roadmap-evidence-copy {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+  padding-top: 0.125rem;
+}
+
+.roadmap-evidence-copy > p {
+  max-width: 45rem;
+  margin: 0;
+  color: rgb(247 246 241 / 0.78);
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  letter-spacing: -0.025em;
+  line-height: 1.45;
+}
+
+.roadmap-github-nudge {
+  margin: 1.5rem 0 0;
+  border-top: 1px solid rgb(247 246 241 / 0.22);
+  padding-top: 1.25rem;
+  color: rgb(247 246 241 / 0.58);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+}
+
+.roadmap-github-nudge a {
+  color: var(--scribe-white);
+  text-decoration: underline;
+  text-decoration-color: var(--scribe-cobalt);
+  text-underline-offset: 0.25em;
+}
+
+.roadmap-github-nudge a::after {
+  content: " ↗";
+}
+
+.roadmap-github-nudge a:focus-visible {
+  outline-color: var(--scribe-paper);
+  outline-offset: 4px;
+}
+
+@media (min-width: 1024px) {
+  .roadmap-phase-header {
+    position: sticky;
+    top: 6.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .roadmap-title-grid,
+  .roadmap-phase-grid,
+  .roadmap-evidence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roadmap-title-grid,
+  .roadmap-phase-grid {
+    gap: 3.5rem;
+  }
+
+  .roadmap-title-grid h1 {
+    max-width: 12ch;
+  }
+
+  .roadmap-intro-copy {
+    max-width: 42rem;
+    padding-top: 0;
+  }
+
+  .roadmap-phase-header h3 {
+    max-width: 18ch;
+  }
+
+  .roadmap-evidence-grid {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .roadmap-intro-inner {
+    padding-top: 3.5rem;
+  }
+
+  .roadmap-kicker {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .roadmap-title-grid {
+    gap: 2.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .roadmap-title-grid h1 {
+    font-size: clamp(3.25rem, 16vw, 4.75rem);
+  }
+
+  .roadmap-phase-grid {
+    gap: 2.75rem;
+    padding-top: 3.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .roadmap-phase-index {
+    font-size: 6.5rem;
+  }
+
+  .roadmap-horizon {
+    margin-top: 2rem;
+  }
+
+  .roadmap-phase-header h3 {
+    font-size: clamp(2.3rem, 11vw, 3.35rem);
+  }
+
+  .roadmap-phase-body {
+    grid-template-columns: 1fr;
+  }
+
+  .roadmap-purpose,
+  .roadmap-outcome {
+    padding-block: 1.25rem 2rem;
+  }
+
+  .roadmap-outcome {
+    border-top: 1px solid var(--scribe-rule-faint);
+  }
+
+  .roadmap-goals {
+    grid-column: 1;
+  }
+
+  .roadmap-goals li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .roadmap-evidence h2 {
+    font-size: clamp(4rem, 22vw, 6rem);
+  }
+
+  .footer-public-links {
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+}
