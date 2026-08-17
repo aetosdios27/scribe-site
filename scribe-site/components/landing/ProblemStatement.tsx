@@ -1,6 +1,6 @@
 import InfiniteSlider from "@/components/smoothui/infinite-slider";
 import MaskRevealUp from "@/components/smoothui/mask-reveal-up";
-import LineByLineSlide from "@/components/smoothui/line-by-line-slide";
+import { TextReveal } from "@/components/interior/text-reveal";
 import LetterGlitch from "@/components/reactbits/letter-glitch";
 
 const painMessages = [
@@ -89,12 +89,15 @@ export function ProblemStatement() {
 
       <div className="problem-recognition">
         <div className="shell">
-          <LineByLineSlide
-            className="problem-recognition-copy"
-            lines={["oh right...", "yeah we feel the same"]}
-            triggerOnView
-            stagger={160}
-          />
+          <div className="problem-recognition-copy">
+            <TextReveal text="oh right..." by="character" stagger={0.035} />
+            <TextReveal
+              text="yeah we feel the same"
+              by="word"
+              stagger={0.08}
+              delay={0.6}
+            />
+          </div>
         </div>
       </div>
 

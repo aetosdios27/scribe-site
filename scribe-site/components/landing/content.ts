@@ -175,6 +175,51 @@ export const PRICING_TIERS: PricingTier[] = [
 
 export const STACK: string[] = ["Next.js", "Vite", "Astro", "Remix", "plain HTML"];
 
+export type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+export const FAQ_ITEMS: FaqItem[] = [
+  {
+    id: "free",
+    question: "is scribe free?",
+    answer:
+      "yes — scribe is open source. the cli and compiler are free, your content lives in your own repository, and there is no hosted cms to pay for. install it with one command and you own the whole stack.",
+  },
+  {
+    id: "content",
+    question: "what happens to my content?",
+    answer:
+      "nothing does. your markdown and mdx stay as local files in your repository, and your repository stays the single source of truth. scribe only compiles that source into your site at build time.",
+  },
+  {
+    id: "frontend",
+    question: "do i need a frontend?",
+    answer:
+      "no. scribe compiles your content into the site you already own — your components, your next.js or vite app, your deployment. if you already have a site, scribe slots in as a publishing layer on top of it.",
+  },
+  {
+    id: "frameworks",
+    question: "which frameworks does it support?",
+    answer:
+      "next.js and vite today. because the output is compile-time, there is no runtime lock-in — the same markdown can move to any supported framework later without being rewritten.",
+  },
+  {
+    id: "production",
+    question: "is it ready for production?",
+    answer:
+      "we're in public beta — install with one command and ship. the beta hardens the publishing path, then turns it into a durable contract you can build a site on for years.",
+  },
+  {
+    id: "contribute",
+    question: "how do i contribute?",
+    answer:
+      "the repository is open on github — issues, pull requests, and discussions are all welcome. the roadmap page tracks what is next and where the project is headed.",
+  },
+];
+
 export const FOOTER_LEGAL: NavItem[] = [
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },

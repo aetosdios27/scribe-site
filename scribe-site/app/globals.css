@@ -713,12 +713,44 @@ summary::-webkit-details-marker {
   .product-film-track,
   .technical-proof-pipeline,
   .technical-proof-ownership,
+  .faq-list,
   .final-cta-inner {
     animation-name: scribe-section-arrival;
     animation-duration: 1ms;
     animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 8% cover 30%;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   faq — the questions people actually ask
+--------------------------------------------------------------------------- */
+
+.faq-inner {
+  padding-block: clamp(5rem, 10vw, 9rem);
+}
+
+.faq-heading {
+  max-width: 16ch;
+  margin-top: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(3rem, 6.4vw, 6.4rem);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.faq-list {
+  max-width: 52rem;
+  margin-top: clamp(3.5rem, 7vw, 7rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-list {
+    animation: none;
   }
 }
 
@@ -731,10 +763,11 @@ summary::-webkit-details-marker {
 }
 
 .install-copy-button {
-  display: grid;
+  display: inline-flex;
   flex: none;
   cursor: pointer;
-  place-items: center;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   border: 1px solid var(--scribe-cobalt);
   background: var(--scribe-cobalt);
@@ -1782,6 +1815,62 @@ pre code {
   font-size: clamp(1.1rem, 1.7vw, 1.5rem);
   letter-spacing: -0.025em;
   line-height: 1.45;
+}
+
+/* ---------------------------------------------------------------------------
+   faq — dark answers section, mirrors roadmap-evidence layout/tokens.
+   scoped variable overrides let the Accordion's existing scribe paper/ink
+   utility classes resolve to dark values without forking accordion.tsx.
+--------------------------------------------------------------------------- */
+.faq-dark {
+  --scribe-paper: #121212;
+  --scribe-paper-raised: #1a1a1a;
+  --scribe-ink: #f7f6f1;
+  --scribe-muted: rgb(247 246 241 / 0.55);
+  --scribe-rule: rgb(247 246 241 / 0.16);
+  --scribe-rule-strong: rgb(247 246 241 / 0.3);
+
+  background: #0a0a0a;
+}
+
+.faq-dark-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(20rem, 1.2fr);
+  gap: clamp(3rem, 9vw, 10rem);
+  padding-top: clamp(4.5rem, 8vw, 8rem);
+  padding-bottom: clamp(5rem, 9vw, 9rem);
+}
+
+.faq-dark .font-mono {
+  color: rgb(247 246 241 / 0.55);
+}
+
+.faq-dark h2 {
+  max-width: 14ch;
+  margin: 2rem 0 0;
+  font-family: var(--font-pixel);
+  font-size: clamp(3rem, 6.5vw, 6rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  color: var(--scribe-ink);
+}
+
+.faq-dark-copy {
+  display: grid;
+  align-content: start;
+  padding-top: 0.125rem;
+}
+
+@media (max-width: 767px) {
+  .faq-dark-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .faq-dark h2 {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
 }
 
 .roadmap-github-nudge {

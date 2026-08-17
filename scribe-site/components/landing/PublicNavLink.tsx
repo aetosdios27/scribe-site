@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import type { NavItem } from "./content";
+import { usePressDepth } from "../interior/press-depth";
+
+const MotionLink = motion.create(Link);
 
 type PublicNavLinkProps = {
   item: NavItem;
@@ -23,13 +27,19 @@ export function PublicNavLink({ item, variant }: PublicNavLinkProps) {
       ? "text-scribe-ink hover:text-scribe-cobalt"
       : "hover:bg-scribe-paper hover:text-scribe-cobalt";
 
+  const { pressed, ref, bind } = usePressDepth();
+
   return (
-    <Link
+    <MotionLink
+      ref={ref}
       href={item.href}
       aria-current={isCurrent ? "page" : undefined}
+      animate={{ y: pressed ? 1 : 0 }}
+      transition={{ type: "spring", stiffness: 520, damping: 34, mass: 0.45 }}
+      {...bind}
       className={`${base} ${state} transition-colors`}
     >
       {item.label}
-    </Link>
+    </MotionLink>
   );
 }

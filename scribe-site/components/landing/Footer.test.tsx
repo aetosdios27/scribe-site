@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { Footer } from "./Footer";
 
 describe("Footer", () => {
-  test("renders the restrained public-alpha footer contract", () => {
+  test("renders the restrained public-beta footer contract", () => {
     const html = renderToStaticMarkup(<Footer />);
 
     expect(html).toContain('aria-label="scribe footer"');

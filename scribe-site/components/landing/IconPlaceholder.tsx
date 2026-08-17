@@ -17,7 +17,8 @@ export type IconName =
   | "bars"
   | "cloud"
   | "braces"
-  | "asterisk";
+  | "asterisk"
+  | "star";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   users: (
@@ -94,6 +95,9 @@ const PATHS: Record<IconName, React.ReactNode> = {
     <path d="M8 4H6v5.5L4 12l2 2.5V20h2M16 4h2v5.5l2 2.5-2 2.5V20h-2" />
   ),
   asterisk: <path d="M12 4v16M5 7.5l14 9M19 7.5l-14 9" />,
+  star: (
+    <path d="M12 3.5l2.4 5.4 5.9.6-4.4 4 1.2 5.9-5.1-3.1-5.1 3.1 1.2-5.9-4.4-4 5.9-.6 2.4-5.4Z" />
+  ),
 };
 
 export function IconPlaceholder({

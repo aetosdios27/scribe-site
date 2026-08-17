@@ -4,7 +4,7 @@ import { DitherField } from "@/components/landing/DitherField";
 import { Footer } from "@/components/landing/Footer";
 import { Header } from "@/components/landing/Header";
 import { SectionLabel } from "@/components/landing/SectionLabel";
-import LineByLineSlide from "@/components/smoothui/line-by-line-slide";
+import { TextReveal } from "@/components/interior/text-reveal";
 import ShimmerSweep from "@/components/smoothui/shimmer-sweep";
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ const phases = [
     horizon: "near horizon",
     title: "Make real integrations boringly reliable",
     purpose:
-      "Harden the public alpha against the websites people actually bring us, without turning every edge case into another configuration system.",
+      "Harden the public beta against the websites people actually bring us, without turning every edge case into another configuration system.",
     outcome:
       "A developer should be able to add Scribe to an established React site, understand any real limits, and trust the result across builds, browsers, and Studio.",
     goals: [
@@ -54,7 +54,7 @@ const phases = [
     horizon: "toward 1.0",
     title: "Make Scribe stable enough to depend on",
     purpose:
-      "Turn a capable prerelease into a durable publishing contract that long-lived websites and outside contributors can reason about.",
+      "Turn a capable beta into a durable publishing contract that long-lived websites and outside contributors can reason about.",
     outcome:
       "Compatibility, change, migration, security, and maintenance expectations become explicit and backed by repeatable evidence.",
     goals: [
@@ -82,7 +82,7 @@ export default function RoadmapPage() {
           <div className="shell roadmap-intro-inner">
             <div className="roadmap-kicker">
               <SectionLabel>roadmap</SectionLabel>
-              <p className="roadmap-edition">public direction / alpha</p>
+              <p className="roadmap-edition">public direction / beta</p>
             </div>
 
             <div className="roadmap-title-grid">
@@ -122,9 +122,7 @@ export default function RoadmapPage() {
                   </div>
                   <p className="roadmap-horizon">{phase.horizon}</p>
                   <h3>
-                    <LineByLineSlide triggerOnView>
-                      {phase.title}
-                    </LineByLineSlide>
+                    <TextReveal text={phase.title} />
                   </h3>
                 </header>
 

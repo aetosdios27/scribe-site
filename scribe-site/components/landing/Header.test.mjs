@@ -20,9 +20,28 @@ describe("Header navigation accessibility", () => {
     expect(header).toContain("md:hidden");
   });
 
-  test("keeps the compact install alpha action in the header", () => {
+  test("keeps the compact install beta action in the header", () => {
     expect(header).toContain('<InstallCommandCopy variant="nav"');
     expect(header).toContain("sticky top-0");
+  });
+
+  test("hides on scroll down via the vendored hide-on-scroll hook", () => {
+    expect(header).toContain("useHideOnScroll");
+    expect(header).toContain("animate={{ y: hidden ? \"-100%\" : 0 }}");
+    const hook = readFileSync(
+      new URL("../interior/hide-on-scroll.ts", import.meta.url),
+      "utf8",
+    );
+    expect(hook).toContain("useHideOnScroll");
+    expect(hook).toContain("requestAnimationFrame");
+  });
+
+  test("ships a star-on-github action beside the install button", () => {
+    expect(header).toContain("star scribe on github");
+    expect(header).toContain("github.com/aetosdios27/scribe");
+    expect(header).toContain('target="_blank"');
+    expect(header).toContain('rel="noreferrer"');
+    expect(header).toContain('name="star"');
   });
 
   test("carries no beta or waitlist language", () => {

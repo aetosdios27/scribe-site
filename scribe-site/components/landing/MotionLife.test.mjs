@@ -27,11 +27,15 @@ describe("site motion layer", () => {
     expect(problem).toContain("problem-punchline-glitch");
   });
 
-  test("slides the recognition copy in line by line", () => {
+  test("reveals the recognition copy with the vendored TextReveal", () => {
     const problem = source("components/landing/ProblemStatement.tsx");
-    expect(problem).toContain("LineByLineSlide");
-    expect(problem).toContain("oh right...");
-    expect(problem).toContain("yeah we feel the same");
+    expect(problem).toContain("TextReveal");
+    expect(problem).toContain('text="oh right..."');
+    expect(problem).toContain('text="yeah we feel the same"');
+
+    const reveal = source("components/interior/text-reveal.tsx");
+    expect(reveal).toContain("useReducedMotion");
+    expect(reveal).toContain("sr-only");
   });
 
   test("sweeps the final CTA heading with a shimmer sweep", () => {
@@ -62,23 +66,15 @@ describe("site motion layer", () => {
     expect(film).not.toContain("Dither");
   });
 
-  test("stays free of prefers-reduced-motion gating", () => {
-    const css = source("app/globals.css");
-    expect(css).not.toContain("prefers-reduced-motion");
-
+  test("vendored interior components honor prefers-reduced-motion", () => {
     for (const path of [
-      "components/landing/DitherField.tsx",
-      "components/landing/ProductFilm.tsx",
-      "components/landing/GlobeCanvas.tsx",
-      "components/landing/InstallCommandCopy.tsx",
-      "components/reactbits/click-spark/index.tsx",
-      "components/reactbits/letter-glitch/index.tsx",
-      "components/smoothui/line-by-line-slide/index.tsx",
-      "components/smoothui/shimmer-sweep/index.tsx",
-      "components/smoothui/mask-reveal-up/index.tsx",
-      "components/smoothui/infinite-slider/index.tsx",
+      "components/interior/copy-button.tsx",
+      "components/interior/press-depth.tsx",
+      "components/interior/text-reveal.tsx",
+      "components/interior/accordion.tsx",
+      "components/landing/Header.tsx",
     ]) {
-      expect(source(path)).not.toMatch(/prefers-reduced-motion/);
+      expect(source(path)).toContain("useReducedMotion");
     }
   });
 });

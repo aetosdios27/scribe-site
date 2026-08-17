@@ -1,8 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useRef, useState } from "react";
 import { SCRIBE_BOOTSTRAP_COMMAND } from "./install-command";
+import { CopyButton } from "../interior/copy-button";
 
 export type CopyState = "idle" | "copied" | "failed";
 
@@ -20,17 +19,6 @@ export async function copyToClipboard(
   }
 }
 
-const stateLabels: Record<Exclude<CopyState, "idle">, string> = {
-  copied: "copied",
-  failed: "copy failed",
-};
-
-const announcements: Record<Exclude<CopyState, "idle">, string> = {
-  copied: "Scribe install command copied",
-  failed:
-    "Copy failed. Select the install command and copy it manually.",
-};
-
 export interface InstallCommandCopyProps {
   variant: "nav" | "full";
   command?: string;
@@ -38,88 +26,6 @@ export interface InstallCommandCopyProps {
   idleLabel?: string;
   ariaLabel?: string;
   className?: string;
-}
-
-function CopyButton({
-  ariaLabel,
-  className,
-  idleLabel,
-  navResponsive = false,
-  value,
-}: {
-  ariaLabel: string;
-  className: string;
-  idleLabel: string;
-  navResponsive?: boolean;
-  value: string;
-}) {
-  const [state, setState] = useState<CopyState>("idle");
-  const pendingRef = useRef(false);
-  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(
-    () => () => {
-      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
-    },
-    [],
-  );
-
-  const handleCopy = useCallback(async () => {
-    if (pendingRef.current) return;
-    pendingRef.current = true;
-
-    try {
-      setState(await copyToClipboard(value));
-    } finally {
-      pendingRef.current = false;
-      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
-      resetTimerRef.current = setTimeout(() => setState("idle"), 2400);
-    }
-  }, [value]);
-
-  const announcement = state === "idle" ? "" : announcements[state];
-
-  return (
-    <span className="install-copy-button-root">
-      <button
-        aria-label={ariaLabel}
-        className={className}
-        data-copy-state={state}
-        onClick={handleCopy}
-        type="button"
-      >
-        <AnimatePresence initial={false} mode="wait">
-          <motion.span
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 3 }}
-            initial={{ opacity: 0, y: -3 }}
-            key={state}
-            transition={{ duration: 0.14 }}
-          >
-            {state === "idle" ? (
-              navResponsive ? (
-                <>
-                  <span className="install-copy-nav-label--narrow">
-                    install
-                  </span>
-                  <span className="install-copy-nav-label--wide">
-                    {idleLabel}
-                  </span>
-                </>
-              ) : (
-                idleLabel
-              )
-            ) : (
-              stateLabels[state]
-            )}
-          </motion.span>
-        </AnimatePresence>
-      </button>
-      <span aria-live="polite" className="sr-only" role="status">
-        {announcement}
-      </span>
-    </span>
-  );
 }
 
 export function InstallCommandCopy({
@@ -130,32 +36,51 @@ export function InstallCommandCopy({
   ariaLabel,
   className = "",
 }: InstallCommandCopyProps) {
-  const defaultAriaLabel = "Copy Scribe alpha bootstrap command";
+  const defaultAriaLabel = "Copy Scribe beta bootstrap command";
   const resolvedAriaLabel = ariaLabel ?? defaultAriaLabel;
+
+  const navLabel =
+    idleLabel ?? "install beta";
 
   if (variant === "nav") {
     return (
-      <CopyButton
-        ariaLabel={resolvedAriaLabel}
-        className="install-copy-button install-copy-button--nav"
-        idleLabel={idleLabel ?? "install alpha"}
-        navResponsive
-        value={command}
-      />
+      <span className="install-copy-button-root">
+        <CopyButton
+          ariaLabel={resolvedAriaLabel}
+          className="install-copy-button install-copy-button--nav"
+          copiedAnnounce="Scribe install command copied"
+          copiedLabel="copied"
+          errorAnnounce="Copy failed. Select the install command and copy it manually."
+          errorLabel="copy failed"
+          label={
+            <>
+              <span className="install-copy-nav-label--narrow">install</span>
+              <span className="install-copy-nav-label--wide">
+                {navLabel}
+              </span>
+            </>
+          }
+          value={command}
+        />
+      </span>
     );
   }
 
   return (
     <div className={`install-copy install-copy--full ${className}`}>
       <p className="install-copy-label">
-        {label ?? "install the public alpha"}
+        {label ?? "install the public beta"}
       </p>
       <div className="install-copy-field">
         <code className="install-copy-command">{command}</code>
         <CopyButton
           ariaLabel={resolvedAriaLabel}
           className="install-copy-button install-copy-button--full"
-          idleLabel={idleLabel ?? "copy"}
+          copiedAnnounce="Scribe install command copied"
+          copiedLabel="copied"
+          errorAnnounce="Copy failed. Select the install command and copy it manually."
+          errorLabel="copy failed"
+          label={idleLabel ?? "copy"}
           value={command}
         />
       </div>

@@ -72,9 +72,9 @@ describe("public roadmap", () => {
 
   test("uses existing text motion without animating every paragraph", () => {
     expect(page).toContain('import ShimmerSweep from "@/components/smoothui/shimmer-sweep"');
-    expect(page).toContain('import LineByLineSlide from "@/components/smoothui/line-by-line-slide"');
+    expect(page).toContain('import { TextReveal } from "@/components/interior/text-reveal"');
     expect(page.match(/<ShimmerSweep/g)?.length).toBe(1);
-    expect(page.match(/<LineByLineSlide/g)?.length).toBe(1);
+    expect(page.match(/<TextReveal/g)?.length).toBe(1);
     expect(page).toContain("triggerOnView");
   });
 });

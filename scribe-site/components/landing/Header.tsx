@@ -1,13 +1,29 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { NAV_ITEMS } from "./content";
 import { IconPlaceholder } from "./IconPlaceholder";
 import { InstallCommandCopy } from "./InstallCommandCopy";
 import { PublicNavLink } from "./PublicNavLink";
+import { useHideOnScroll } from "../interior/hide-on-scroll";
+
+const MotionLink = motion.create(Link);
+
+const SLIDE = { type: "spring", stiffness: 150, damping: 27, mass: 1 } as const;
 
 export function Header() {
+  const { ref, hidden } = useHideOnScroll<HTMLElement>({ topGuard: 16 });
+  const reduced = useReducedMotion();
+
   return (
-    <header className="sticky top-0 z-40 border-b border-scribe-rule bg-scribe-paper">
+    <motion.header
+      ref={ref}
+      animate={{ y: hidden ? "-100%" : 0 }}
+      transition={reduced ? { duration: 0 } : SLIDE}
+      className="sticky top-0 z-40 border-b border-scribe-rule bg-scribe-paper"
+    >
       <div className="shell flex h-16 items-center justify-between gap-4 md:h-14 md:gap-6">
         <Link
           href="/"
@@ -39,6 +55,18 @@ export function Header() {
             name="asterisk"
             className="hidden size-4 text-scribe-ink sm:block"
           />
+
+          <MotionLink
+            href="https://github.com/aetosdios27/scribe"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="star scribe on github"
+            className="hidden h-9 items-center gap-2 rounded-xs border border-scribe-rule-strong px-3 font-mono text-[13px] text-scribe-ink transition-colors hover:bg-scribe-ink hover:text-scribe-paper md:inline-flex"
+          >
+            <IconPlaceholder name="star" className="size-4" />
+            star
+          </MotionLink>
+
           <InstallCommandCopy variant="nav" />
 
           <details className="group relative md:hidden">
@@ -63,6 +91,6 @@ export function Header() {
           </details>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

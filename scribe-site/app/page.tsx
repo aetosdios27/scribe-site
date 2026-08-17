@@ -5,6 +5,7 @@ import { Hero } from "@/components/landing/Hero";
 import { ProblemStatement } from "@/components/landing/ProblemStatement";
 import { ProductFilm } from "@/components/landing/ProductFilm";
 import { TechnicalProof } from "@/components/landing/TechnicalProof";
+import { Faq } from "@/components/landing/Faq";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <ProblemStatement />
         <ProductFilm />
         <TechnicalProof />
+        <Faq />
         <FinalCta />
       </main>
       <Footer />
