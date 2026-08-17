@@ -5,8 +5,8 @@ import { join } from "node:path";
 const root = join(import.meta.dir, "../..");
 const source = (path) => readFileSync(join(root, path), "utf8");
 
-const BOOTSTRAP_COMMAND = "bunx @scribe-sdk/cli@alpha integrate";
-const DRY_RUN_COMMAND = "bunx @scribe-sdk/cli@alpha integrate --dry-run";
+const BOOTSTRAP_COMMAND = "bunx @scribe-sdk/cli@beta integrate";
+const DRY_RUN_COMMAND = "bunx @scribe-sdk/cli@beta integrate --dry-run";
 
 const productionPaths = [
   "components/landing/install-command.ts",
@@ -27,7 +27,7 @@ describe("Scribe install command CTAs", () => {
     expect(constant).toContain(`"${BOOTSTRAP_COMMAND}"`);
     expect(constant).toContain(`"${DRY_RUN_COMMAND}"`);
     expect(constant).toContain(
-      `"bun add --global @scribe-sdk/cli@alpha"`,
+      `"bun add --global @scribe-sdk/cli@beta"`,
     );
 
     const occurrences = productionPaths.reduce(
@@ -48,8 +48,8 @@ describe("Scribe install command CTAs", () => {
     const component = source(componentPath);
     expect(component).toContain('variant: "nav" | "full"');
     expect(component).toContain("SCRIBE_BOOTSTRAP_COMMAND");
-    expect(component).toContain('"install alpha"');
-    expect(component).toContain("Copy Scribe alpha bootstrap command");
+    expect(component).toContain('"install beta"');
+    expect(component).toContain("Copy Scribe beta bootstrap command");
 
     const header = source("components/landing/Header.tsx");
     const hero = source("components/landing/Hero.tsx");
@@ -57,7 +57,7 @@ describe("Scribe install command CTAs", () => {
     expect(header).toContain('<InstallCommandCopy variant="nav"');
     expect(hero).toContain('<InstallCommandCopy variant="full"');
     expect(finalCta).toContain('<InstallCommandCopy variant="full"');
-    expect(hero).toContain("public alpha");
+    expect(hero).toContain("public beta");
   });
 
   test("adapts clipboard behavior with honest idle, success, and failure states", () => {
@@ -69,13 +69,19 @@ describe("Scribe install command CTAs", () => {
     expect(component).toContain("navigator.clipboard.writeText");
     expect(component).toContain("try {");
     expect(component).toContain("catch");
-    expect(component).toContain('aria-live="polite"');
-    expect(component).toContain('role="status"');
+    expect(component).toContain('copiedAnnounce="Scribe install command copied"');
+    expect(component).toContain('errorAnnounce="Copy failed.');
     expect(component).toContain('"copied"');
     expect(component).toContain('"copy failed"');
-    expect(component).toContain("<button");
-    expect(component).not.toContain("execCommand");
+    expect(component).toContain("<CopyButton");
     expect(component).not.toContain('variant: "nav" | "full" | "compact"');
+
+    const vendored = source("components/interior/copy-button.tsx");
+    expect(vendored).toContain("useCopyToClipboard");
+    expect(vendored).toContain("execCommand");
+    expect(vendored).toContain('aria-live="polite"');
+    expect(vendored).toContain('role="status"');
+    expect(vendored).toContain('data-copy-state');
   });
 
   test("reports clipboard success and failure without changing the command", async () => {
@@ -112,6 +118,16 @@ describe("Scribe install command CTAs", () => {
     for (const path of productionPaths) {
       expect(source(path)).not.toContain("bun add @scribe-sdk/react@alpha");
       expect(source(path)).not.toContain("bun add --dev @scribe-sdk/cli@alpha");
+    }
+  });
+
+  test("pins every install command to the beta channel, never @latest", () => {
+    // `latest` on npm is intentionally left pointed at an old alpha release
+    // (see scribe's RELEASING.md) until a deliberate stable release moves
+    // it — the automated publisher never does. A CTA that says "install
+    // beta" but resolves `@latest` silently hands out a stale build.
+    for (const path of productionPaths) {
+      expect(source(path)).not.toContain("@scribe-sdk/cli@latest");
     }
   });
 });

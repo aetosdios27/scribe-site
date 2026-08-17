@@ -104,10 +104,10 @@ export default function TypeSpecimen() {
       <h2 className="mt-14 font-mono text-xs text-scribe-muted">
         / pixel interruptions
       </h2>
-      <Row label="public alpha badge">
+      <Row label="public beta badge">
         <p className="inline-flex items-center gap-2 rounded-xs border border-scribe-rule-strong px-2 py-1 font-pixel text-xs text-scribe-cobalt">
           <span aria-hidden="true" className="size-1.5 bg-scribe-cobalt" />
-          public alpha is live
+          public beta is live
         </p>
       </Row>
       <Row label="most popular">
@@ -122,7 +122,7 @@ export default function TypeSpecimen() {
       </Row>
       <Row label="microcopy">
         <p className="bg-scribe-cobalt px-3 py-2 font-pixel text-xs text-scribe-paper/80">
-          public alpha. install with bun.
+          public beta. install with bun.
         </p>
       </Row>
 
